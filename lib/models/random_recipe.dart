@@ -1,13 +1,13 @@
 part of foodapp_models;
 
 @freezed
-class Welcome with _$Welcome {
-  factory Welcome({
+class Recipes with _$Recipes {
+  factory Recipes({
     required List<Recipe> recipes,
-  }) = _Welcome;
+  }) = _Recipes;
 
-  factory Welcome.fromJson(Map<String, dynamic> json) =>
-      _$WelcomeFromJson(json);
+  factory Recipes.fromJson(Map<String, dynamic> json) =>
+      _$RecipesFromJson(json);
 }
 
 @freezed

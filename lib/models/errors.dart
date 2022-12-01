@@ -5,7 +5,7 @@ class FoodAppValidationError with _$FoodAppValidationError {
   factory FoodAppValidationError(
     int code,
     List<FoodAppFieldValidationError> errors,
-  ) = FoodAppValidationError;
+  ) = _FoodAppValidationError;
 
   factory FoodAppValidationError.fromJson(Map<String, dynamic> json) =>
       _$FoodAppValidationErrorFromJson(json);
@@ -32,14 +32,14 @@ class Failure implements Exception {
   List<FoodAppFieldValidationError> errors;
 
   List<String> errorMessages() {
-    final errors = <String>[];
+    final _errors = <String>[];
 
-    for (final error in errors) {
-      errors.add(
-        error.errors[0],
+    for (final _error in errors) {
+      _errors.add(
+        _error.errors[0],
       );
     }
 
-    return List.castFrom<dynamic, String>(errors);
+    return List.castFrom<dynamic, String>(_errors);
   }
 }
