@@ -24,7 +24,6 @@ Future<void> main() async {
   FoodAppConfig(
     values: FoodAppValues(
       baseDomain: 'https://api.spoonacular.com/recipes',
-      hiveBox: 'foodapp_development',
     ),
   );
 

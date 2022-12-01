@@ -24,7 +24,7 @@ class NetworkUtil {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           options.headers['Authorization'] =
-              'Bearer ${HiveServiceImplementation().retrieveToken()}';
+              'Bearer ${RecipesServiceImplementation()}';
           return handler.next(options);
         },
       ),

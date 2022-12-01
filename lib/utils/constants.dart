@@ -3,13 +3,14 @@ part of foodapp_utils;
 class FoodAppValues {
   FoodAppValues({
     required this.baseDomain,
-    required this.hiveBox,
     this.randomRecipeUrl = 'https://api.spoonacular.com/recipes/random',
+    this.informationRecipe =
+        'https://api.spoonacular.com/recipes/{id}/information',
   });
 
   final String baseDomain;
   String? randomRecipeUrl;
-  final String hiveBox;
+  String? informationRecipe;
 }
 
 class FoodAppConfig {
