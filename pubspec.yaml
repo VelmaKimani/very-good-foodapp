@@ -10,13 +10,16 @@ environment:
 dependencies:
   bloc: ^8.1.0
   dio: ^4.0.6
+  firebase_core: ^2.2.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_localizations:
     sdk: flutter
 
+  flutter_screenutil: ^5.6.0
   freezed_annotation: ^2.2.0
+  google_fonts: ^3.0.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   intl: ^0.17.0
@@ -27,6 +30,8 @@ dependencies:
 dev_dependencies:
   bloc_test: ^9.1.0
   build_runner: ^2.3.0
+  device_preview: ^1.1.0
+
   flutter_test:
     sdk: flutter
   freezed: ^2.2.0
