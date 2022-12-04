@@ -11,6 +11,7 @@ import 'package:foodapp/cubit/get_info_recipes_cubit.dart';
 import 'package:foodapp/cubit/get_random_recipes_cubit.dart';
 import 'package:foodapp/models/_index.dart';
 import 'package:foodapp/screens/home_screen.dart';
+import 'package:foodapp/screens/instructions_screen.dart';
 import 'package:foodapp/services/_index.dart';
 import 'package:logger/logger.dart';
 

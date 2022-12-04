@@ -2,11 +2,15 @@ part of foodapp_utils;
 
 class FoodAppRouter {
   static const String homeRoute = '/';
+  static const String instructionsRoute = '/instructionsRoute';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeRoute:
         return _route(const HomeScreen());
+      case instructionsRoute:
+        return _route(const InstructionsScreen());
+
       default:
         return _route(
           Scaffold(

@@ -7,4 +7,4 @@ const kVerseContainerColor = Color(0xfffffbf9);
 const kVerseContainerBorderColor = Color(0xfffff2eb);
 const kCommentBackgroundColor = Color(0xfff5f5f6);
 const kCommentBorderColor = Color(0xffdadada);
-const kDeletePostColor = Color(0xFFE57373);
+const kSecondaryColor = Color(0xFFE57373);
