@@ -7,7 +7,9 @@ class FoodAppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeRoute:
-        return _route(const HomeScreen());
+        return _route(
+          HomeScreen(),
+        );
       case instructionsRoute:
         return _route(const InstructionsScreen());
 

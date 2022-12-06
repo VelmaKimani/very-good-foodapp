@@ -5,9 +5,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:foodapp/app/app.dart';
 import 'package:foodapp/bootstrap.dart';
+import 'package:foodapp/screens/home_screen.dart';
 
 void main() {
-  bootstrap(() => const App());
+  bootstrap(HomeScreen.new);
 }

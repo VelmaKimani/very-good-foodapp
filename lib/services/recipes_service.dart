@@ -1,25 +1,25 @@
 part of foodapp_services;
 
 abstract class RecipesService {
-  Future<Recipes> getRandomRecipes();
-  Future<Recipes> getInformationRecipes();
+  Future<Recipe> getRandomRecipes();
+  Future<RecipeList> getInformationRecipes();
 }
 
 class RecipesServiceImplementation implements RecipesService {
   final _baseUrl = FoodAppConfig.instance!.values.baseDomain;
 
   @override
-  Future<Recipes> getRandomRecipes() async {
+  Future<Recipe> getRandomRecipes() async {
     final recipesUrl = '$_baseUrl/random';
 
     try {
       final resp = await _networkUtil.getReq(
-        '$recipesUrl?apiKey=fe5ded9893c54b719db26c0f774ff438&number=1&tags=vegetarian,dessert',
+        '$recipesUrl?apiKey=42a3609943cc4733a41db39a616901d8&number=1&tags=vegetarian,dessert',
       );
 
       Logger().i(resp);
 
-      return Recipes.fromJson(resp);
+      return Recipe.fromJson(resp);
     } catch (e) {
       Logger().e(e.toString());
       rethrow;
@@ -27,17 +27,17 @@ class RecipesServiceImplementation implements RecipesService {
   }
 
   @override
-  Future<Recipes> getInformationRecipes() async {
-    final recipesUrl = '$_baseUrl/{id}/information';
+  Future<RecipeList> getInformationRecipes() async {
+    final recipesUrl = '$_baseUrl/716429/information';
 
     try {
       final resp = await _networkUtil.getReq(
-        '$recipesUrl?apiKey=fe5ded9893c54b719db26c0f774ff438&includeNutrition=false',
+        '$recipesUrl?apiKey=42a3609943cc4733a41db39a616901d8',
       );
 
       Logger().i(resp);
 
-      return Recipes.fromJson(resp);
+      return RecipeList.fromJson(resp);
     } catch (e) {
       Logger().e(e.toString());
       rethrow;

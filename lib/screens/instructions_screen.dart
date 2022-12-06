@@ -37,9 +37,7 @@ class _InstructionsScreenState extends State<InstructionsScreen> {
                 ),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                  child: Flexible(
-                    child: Text(''),
-                  ),
+                  child: Text(''),
                 ),
               ),
             ],

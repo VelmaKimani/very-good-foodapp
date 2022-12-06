@@ -19,10 +19,9 @@ class GetRandomRecipesCubit extends Cubit<GetRandomRecipesState> {
     emit(const GetRandomRecipesState.loading());
     try {
       final result = await _recipesService.getRandomRecipes();
+      Logger().i(result);
 
-      Logger().i(result.recipes);
-
-      emit(const GetRandomRecipesState.loaded());
+      emit(GetRandomRecipesState.loaded(result));
     } on Failure catch (e) {
       emit(GetRandomRecipesState.error(e.message));
     } catch (e) {

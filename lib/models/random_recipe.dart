@@ -1,55 +1,55 @@
 part of foodapp_models;
 
 @freezed
-class Recipes with _$Recipes {
-  factory Recipes({
-    required List<Recipe> recipes,
-  }) = _Recipes;
+class RecipeList with _$RecipeList {
+  factory RecipeList(
+    List<Recipe> recipe,
+  ) = _RecipeList;
 
-  factory Recipes.fromJson(Map<String, dynamic> json) =>
-      _$RecipesFromJson(json);
+  factory RecipeList.fromJson(Map<String, dynamic> json) =>
+      _$RecipeListFromJson(json);
 }
 
 @freezed
 class Recipe with _$Recipe {
-  factory Recipe({
-    required bool vegetarian,
-    required bool vegan,
-    required bool glutenFree,
-    required bool dairyFree,
-    required bool veryHealthy,
-    required bool cheap,
-    required bool veryPopular,
-    required bool sustainable,
-    required bool lowFodmap,
-    required int weightWatcherSmartPoints,
-    required String gaps,
-    required int preparationMinutes,
-    required int cookingMinutes,
-    required int aggregateLikes,
-    required int healthScore,
-    required String creditsText,
-    required String license,
-    required String sourceName,
-    required double pricePerServing,
-    required List<ExtendedIngredient> extendedIngredients,
-    required int id,
-    required String title,
-    required int readyInMinutes,
-    required int servings,
-    required String sourceUrl,
-    required String image,
-    required String imageType,
-    required String summary,
-    required List<String> cuisines,
-    required List<String> dishTypes,
-    required List<String> diets,
-    required List<dynamic> occasions,
-    required String instructions,
-    required List<AnalyzedInstruction> analyzedInstructions,
-    required dynamic originalId,
-    required String spoonacularSourceUrl,
-  }) = _Recipe;
+  factory Recipe(
+    bool? vegetarian,
+    bool? vegan,
+    bool? glutenFree,
+    bool? dairyFree,
+    bool? veryHealthy,
+    bool? cheap,
+    bool? veryPopular,
+    bool? sustainable,
+    bool? lowFodmap,
+    int? weightWatcherSmartPoints,
+    String? gaps,
+    int? preparationMinutes,
+    int? cookingMinutes,
+    int? aggregateLikes,
+    int? healthScore,
+    String? creditsText,
+    String? license,
+    String? sourceName,
+    double? pricePerServing,
+    List<ExtendedIngredient>? extendedIngredients,
+    int? id,
+    String? title,
+    int? readyInMinutes,
+    int? servings,
+    String? sourceUrl,
+    String? image,
+    String? imageType,
+    String? summary,
+    List<String>? cuisines,
+    List<String>? dishTypes,
+    List<String>? diets,
+    List<dynamic>? occasions,
+    String? instructions,
+    List<AnalyzedInstruction>? analyzedInstructions,
+    dynamic originalId,
+    String? spoonacularSourceUrl,
+  ) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 }
