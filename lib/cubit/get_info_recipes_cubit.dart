@@ -20,7 +20,7 @@ class GetInfoRecipesCubit extends Cubit<GetInfoRecipesState> {
     try {
       final result = await _recipesService.getInformationRecipes();
 
-      Logger().i(result.recipe);
+      Logger().i(result.recipes);
 
       emit(const GetInfoRecipesState.loaded());
     } on Failure catch (e) {

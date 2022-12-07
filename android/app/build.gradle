@@ -21,10 +21,17 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-def keystoreProperties = new Properties()
+/* def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} */
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('./keystore/key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
 }
 
 apply plugin: 'com.android.application'
@@ -56,9 +63,11 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
+
     }
 
-    signingConfigs {
+    /* signingConfigs {
         if (System.getenv("ANDROID_KEYSTORE_PATH")) {
             release {
                 storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
@@ -74,8 +83,22 @@ android {
                 storePassword keystoreProperties['storePassword']
             }
         }
-    }
+    } */
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('../keystore/debug.keystore')
+            storePassword 'android'
+        }
 
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     flavorDimensions "default"
     productFlavors { 
         production {
@@ -116,5 +139,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
     implementation platform('com.google.firebase:firebase-bom:29.2.1')
     implementation platform('com.google.firebase:firebase-bom:28.0.0')
+    implementation 'com.android.support:multidex:2.0.1'
+
 
 }

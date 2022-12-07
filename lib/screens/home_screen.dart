@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +10,9 @@ import 'package:foodapp/utils/_index.dart';
 import '../models/_index.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -26,22 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ColoredBox(
           color: Theme.of(context).secondaryHeaderColor,
           child: BlocBuilder<GetRandomRecipesCubit, GetRandomRecipesState>(
-            builder: /*  (context, state) {
-            return state.when(
-              initial: CircularProgressIndicator.new,
-              loading: CircularProgressIndicator.new,
-              loaded: (recipes) => ListView.builder(
-                itemCount: recipes!.length,
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(recipes[index].title.toString()),
-                  subtitle: Text(recipes[index].servings.toString()),
-                ),
-              ),
-              error: Text.new,
-            );
-          }), */
-
-                (context, state) {
+            builder: (context, state) {
               return state.when(
                 initial: () => const Center(
                   child: Text('Loading'),
@@ -49,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 loading: () => const Center(
                   child: CircularProgressIndicator(),
                 ),
-                loaded: (recipe) => Column(
+                loaded: (recipes) => Column(
                   children: [
                     Center(
                       child: Text(
-                        recipe.title ?? '',
+                        recipes[0].title!,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -67,11 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: MediaQuery.of(context).size.height * 0.42,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(32),
-                        child: const Image(
+                        child: Image(
                           fit: BoxFit.cover,
-                          image: AssetImage(
-                            'lib/assets/smoothy1.jpg',
-                          ),
+                          image: NetworkImage(recipes[0].image!),
                         ),
                       ),
                     ),
@@ -87,6 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             children: [
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     margin: const EdgeInsets.symmetric(
@@ -98,48 +88,85 @@ class _HomeScreenState extends State<HomeScreen> {
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
+                                        fontWeight: FontWeight.w800,
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.height *
-                                        0.18,
+                                  Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      vertical: 10,
+                                      horizontal: 15,
+                                    ),
+                                    child: Text(
+                                      'Servings ${recipes[0].servings.toString()}',
+                                    ),
                                   ),
-                                  Text(recipe.servings.toString()),
                                 ],
                               ),
                               SizedBox(
-                                height: 90,
-                                child: Card(
-                                  margin: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 10,
-                                  ),
-                                  color: Theme.of(context).secondaryHeaderColor,
-                                  child: ListTile(
-                                    title: Text(
-                                      recipe.title ?? '',
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w500,
+                                height: 400,
+                                child: ListView.builder(
+                                  itemCount:
+                                      recipes[0].extendedIngredients!.length,
+                                  itemBuilder: (context, index) => SizedBox(
+                                    height: 90,
+                                    child: Card(
+                                      margin: const EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 10,
                                       ),
-                                    ),
-                                    leading: const Icon(
-                                      Icons.restaurant_menu,
-                                      color: Colors.green,
-                                    ),
-                                    trailing: Text(
-                                      recipe.readyInMinutes.toString(),
-                                      style: const TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.w500,
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor,
+                                      child: ListTile(
+                                        title: Text(
+                                          recipes[0]
+                                              .extendedIngredients![index]
+                                              .name
+                                              .toString(),
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        leading: Container(
+                                          width: 50,
+                                          height: 50,
+                                          margin: const EdgeInsets.symmetric(
+                                            vertical: 10,
+                                          ),
+                                          child: Image(
+                                            fit: BoxFit.contain,
+                                            image: NetworkImage(
+                                              recipes[0]
+                                                  .extendedIngredients![index]
+                                                  .image!,
+                                            ),
+                                          ),
+                                        ),
+                                        trailing: Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            vertical: 4,
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              const Text('amount'),
+                                              Text(
+                                                '${recipes[0].extendedIngredients![index].amount.toString()} ${recipes[0].extendedIngredients![index].unit}',
+                                                style: const TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                               Container(
-                                width: 220,
-                                height: 70,
+                                width:
+                                    MediaQuery.of(context).size.height * 0.53,
                                 margin: const EdgeInsets.symmetric(
                                   vertical: 10,
                                 ),
@@ -149,30 +176,40 @@ class _HomeScreenState extends State<HomeScreen> {
                                     BoxShadow(
                                       color: Color.fromARGB(63, 198, 198, 198),
                                       offset: Offset(2, 4),
-                                      blurRadius: 10,
+                                      blurRadius: 5,
                                     )
                                   ],
                                 ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(22),
-                                  child: ElevatedButton(
-                                    style: const ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStatePropertyAll<Color>(
-                                        Colors.green,
+                                child: Column(
+                                  children: [
+                                    const Center(
+                                      child: Text(
+                                        'Instructions',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                        textAlign: TextAlign.center,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                        context,
-                                        FoodAppRouter.instructionsRoute,
-                                      );
-                                    },
-                                    child: const Text(
-                                      'Start Cooking!',
-                                      style: TextStyle(fontSize: 20),
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                        vertical: 10,
+                                        horizontal: 20,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 2,
+                                        ),
+                                        child: Text(recipes[0].instructions!),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ),
                             ],

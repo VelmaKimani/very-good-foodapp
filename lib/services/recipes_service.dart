@@ -1,7 +1,7 @@
 part of foodapp_services;
 
 abstract class RecipesService {
-  Future<Recipe> getRandomRecipes();
+  Future<RecipeList> getRandomRecipes();
   Future<RecipeList> getInformationRecipes();
 }
 
@@ -9,7 +9,7 @@ class RecipesServiceImplementation implements RecipesService {
   final _baseUrl = FoodAppConfig.instance!.values.baseDomain;
 
   @override
-  Future<Recipe> getRandomRecipes() async {
+  Future<RecipeList> getRandomRecipes() async {
     final recipesUrl = '$_baseUrl/random';
 
     try {
@@ -19,7 +19,7 @@ class RecipesServiceImplementation implements RecipesService {
 
       Logger().i(resp);
 
-      return Recipe.fromJson(resp);
+      return RecipeList.fromJson(resp);
     } catch (e) {
       Logger().e(e.toString());
       rethrow;

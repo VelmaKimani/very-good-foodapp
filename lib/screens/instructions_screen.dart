@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubit/get_random_recipes_cubit.dart';
 
 class InstructionsScreen extends StatefulWidget {
   const InstructionsScreen({super.key});
@@ -8,6 +11,12 @@ class InstructionsScreen extends StatefulWidget {
 }
 
 class _InstructionsScreenState extends State<InstructionsScreen> {
+  @override
+  void initState() {
+    context.read<GetRandomRecipesCubit>().getRecipes();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(

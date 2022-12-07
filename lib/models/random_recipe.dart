@@ -3,7 +3,7 @@ part of foodapp_models;
 @freezed
 class RecipeList with _$RecipeList {
   factory RecipeList(
-    List<Recipe> recipe,
+    List<Recipe> recipes,
   ) = _RecipeList;
 
   factory RecipeList.fromJson(Map<String, dynamic> json) =>
@@ -56,10 +56,10 @@ class Recipe with _$Recipe {
 
 @freezed
 class AnalyzedInstruction with _$AnalyzedInstruction {
-  factory AnalyzedInstruction({
-    required String name,
-    required List<Step> steps,
-  }) = _AnalyzedInstruction;
+  factory AnalyzedInstruction(
+    String? name,
+    List<Step>? steps,
+  ) = _AnalyzedInstruction;
 
   factory AnalyzedInstruction.fromJson(Map<String, dynamic> json) =>
       _$AnalyzedInstructionFromJson(json);
@@ -67,67 +67,67 @@ class AnalyzedInstruction with _$AnalyzedInstruction {
 
 @freezed
 class Step with _$Step {
-  factory Step({
-    required int number,
-    required String step,
-    required List<Ent> ingredients,
-    required List<Ent> equipment,
-    required Length length,
-  }) = _Step;
+  factory Step(
+    int? number,
+    String? step,
+    List<Ent>? ingredients,
+    List<Ent>? equipment,
+    Length? length,
+  ) = _Step;
 
   factory Step.fromJson(Map<String, dynamic> json) => _$StepFromJson(json);
 }
 
 @freezed
 class Ent with _$Ent {
-  factory Ent({
-    required int id,
-    required String name,
-    required String localizedName,
-    required String image,
-  }) = _Ent;
+  factory Ent(
+    int? id,
+    String? name,
+    String? localizedName,
+    String? image,
+  ) = _Ent;
 
   factory Ent.fromJson(Map<String, dynamic> json) => _$EntFromJson(json);
 }
 
 @freezed
 class Length with _$Length {
-  factory Length({
-    required int number,
-    required String unit,
-  }) = _Length;
+  factory Length(
+    int? number,
+    String? unit,
+  ) = _Length;
 
   factory Length.fromJson(Map<String, dynamic> json) => _$LengthFromJson(json);
 }
 
 @freezed
 class ExtendedIngredient with _$ExtendedIngredient {
-  factory ExtendedIngredient({
-    required int id,
-    required Aisle aisle,
-    required String image,
-    required Consistency consistency,
-    required String name,
-    required String nameClean,
-    required String original,
-    required String originalName,
-    required double amount,
-    required String unit,
-    required List<String> meta,
-    required Measures measures,
-  }) = _ExtendedIngredient;
+  factory ExtendedIngredient(
+    int? id,
+    String? aisle,
+    String? image,
+    Consistency? consistency,
+    String? name,
+    String? nameClean,
+    String? original,
+    String? originalName,
+    double? amount,
+    String? unit,
+    List<String>? meta,
+    Measures? measures,
+  ) = _ExtendedIngredient;
 
   factory ExtendedIngredient.fromJson(Map<String, dynamic> json) =>
       _$ExtendedIngredientFromJson(json);
 }
 
-enum Aisle { BAKING, SPICES_AND_SEASONINGS, MILK_EGGS_OTHER_DAIRY }
+/* enum Aisle { BAKING, SPICES_AND_SEASONINGS, MILK_EGGS_OTHER_DAIRY }
 
 final aisleValues = EnumValues({
   'Baking': Aisle.BAKING,
   'Milk, Eggs, Other Dairy': Aisle.MILK_EGGS_OTHER_DAIRY,
   'Spices and Seasonings': Aisle.SPICES_AND_SEASONINGS
-});
+}); */
 
 enum Consistency { SOLID, LIQUID }
 
@@ -136,10 +136,10 @@ final consistencyValues =
 
 @freezed
 class Measures with _$Measures {
-  factory Measures({
-    required Metric us,
-    required Metric metric,
-  }) = _Measures;
+  factory Measures(
+    Metric? us,
+    Metric? metric,
+  ) = _Measures;
 
   factory Measures.fromJson(Map<String, dynamic> json) =>
       _$MeasuresFromJson(json);
@@ -147,11 +147,11 @@ class Measures with _$Measures {
 
 @freezed
 class Metric with _$Metric {
-  factory Metric({
-    required double amount,
-    required String unitShort,
-    required String unitLong,
-  }) = _Metric;
+  factory Metric(
+    double? amount,
+    String? unitShort,
+    String? unitLong,
+  ) = _Metric;
 
   factory Metric.fromJson(Map<String, dynamic> json) => _$MetricFromJson(json);
 }
