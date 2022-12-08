@@ -3,14 +3,15 @@ part of foodapp_utils;
 class FoodAppValues {
   FoodAppValues({
     required this.baseDomain,
-    this.randomRecipeUrl = 'https://api.spoonacular.com/recipes/random',
+    this.randomRecipeUrl =
+        '/random?apiKey=42a3609943cc4733a41db39a616901d8&number=1&tags=vegetarian,dessert',
     this.informationRecipe =
-        'https://api.spoonacular.com/recipes/{id}/information',
+        '/{id}/information?apiKey=fe5ded9893c54b719db26c0f774ff438&includeNutrition=false',
     this.imagesUrl = 'https://spoonacular.com/cdn/ingredients_100x100/',
   });
 
   final String baseDomain;
-  String? randomRecipeUrl;
+  final String? randomRecipeUrl;
   String? informationRecipe;
   String? imagesUrl;
 }

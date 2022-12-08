@@ -7,14 +7,17 @@ abstract class RecipesService {
 
 class RecipesServiceImplementation implements RecipesService {
   final _baseUrl = FoodAppConfig.instance!.values.baseDomain;
+  final _allRandomRecipes = FoodAppConfig.instance!.values.randomRecipeUrl;
+  final _allInformationRecipe =
+      FoodAppConfig.instance!.values.informationRecipe;
 
   @override
   Future<RecipeList> getRandomRecipes() async {
-    final recipesUrl = '$_baseUrl/random';
+    final recipesUrl = '$_baseUrl$_allRandomRecipes';
 
     try {
       final resp = await _networkUtil.getReq(
-        '$recipesUrl?apiKey=42a3609943cc4733a41db39a616901d8&number=1&tags=vegetarian,dessert',
+        recipesUrl,
       );
 
       Logger().i(resp);
@@ -28,11 +31,11 @@ class RecipesServiceImplementation implements RecipesService {
 
   @override
   Future<RecipeList> getInformationRecipes() async {
-    final recipesUrl = '$_baseUrl/716429/information';
+    final recipesUrl = '$_baseUrl$_allInformationRecipe';
 
     try {
       final resp = await _networkUtil.getReq(
-        '$recipesUrl?apiKey=42a3609943cc4733a41db39a616901d8',
+        recipesUrl,
       );
 
       Logger().i(resp);
