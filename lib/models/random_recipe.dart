@@ -121,14 +121,6 @@ class ExtendedIngredient with _$ExtendedIngredient {
       _$ExtendedIngredientFromJson(json);
 }
 
-/* enum Aisle { BAKING, SPICES_AND_SEASONINGS, MILK_EGGS_OTHER_DAIRY }
-
-final aisleValues = EnumValues({
-  'Baking': Aisle.BAKING,
-  'Milk, Eggs, Other Dairy': Aisle.MILK_EGGS_OTHER_DAIRY,
-  'Spices and Seasonings': Aisle.SPICES_AND_SEASONINGS
-}); */
-
 enum Consistency { SOLID, LIQUID }
 
 final consistencyValues =

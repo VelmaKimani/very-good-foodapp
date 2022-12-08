@@ -6,11 +6,13 @@ class FoodAppValues {
     this.randomRecipeUrl = 'https://api.spoonacular.com/recipes/random',
     this.informationRecipe =
         'https://api.spoonacular.com/recipes/{id}/information',
+    this.imagesUrl = 'https://spoonacular.com/cdn/ingredients_100x100/',
   });
 
   final String baseDomain;
   String? randomRecipeUrl;
   String? informationRecipe;
+  String? imagesUrl;
 }
 
 class FoodAppConfig {

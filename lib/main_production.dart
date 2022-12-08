@@ -6,7 +6,7 @@
 // https://opensource.org/licenses/MIT.
 
 import 'package:foodapp/bootstrap.dart';
-import 'package:foodapp/screens/home_screen.dart';
+import 'package:foodapp/screens/home/home_screen.dart';
 
 void main() {
   bootstrap(HomeScreen.new);

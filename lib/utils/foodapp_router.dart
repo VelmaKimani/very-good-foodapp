@@ -8,10 +8,8 @@ class FoodAppRouter {
     switch (settings.name) {
       case homeRoute:
         return _route(
-          HomeScreen(),
+          const HomeScreen(),
         );
-      case instructionsRoute:
-        return _route(const InstructionsScreen());
 
       default:
         return _route(

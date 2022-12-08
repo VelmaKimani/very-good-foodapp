@@ -1,18 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:foodapp/cubit/get_random_recipes_cubit.dart';
+import 'package:foodapp/screens/home/get_random_recipes_cubit.dart';
 import 'package:foodapp/utils/_index.dart';
-
-import '../models/_index.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -103,66 +98,66 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 400,
-                                child: ListView.builder(
-                                  itemCount:
-                                      recipes[0].extendedIngredients!.length,
-                                  itemBuilder: (context, index) => SizedBox(
-                                    height: 90,
-                                    child: Card(
-                                      margin: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                        vertical: 10,
-                                      ),
-                                      color: Theme.of(context)
-                                          .secondaryHeaderColor,
-                                      child: ListTile(
-                                        title: Text(
-                                          recipes[0]
-                                              .extendedIngredients![index]
-                                              .name
-                                              .toString(),
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        leading: Container(
-                                          width: 50,
-                                          height: 50,
+                              Column(
+                                children: recipes[0]
+                                    .extendedIngredients!
+                                    .map(
+                                      (ingredient) => SizedBox(
+                                        height: 90,
+                                        child: Card(
                                           margin: const EdgeInsets.symmetric(
+                                            horizontal: 15,
                                             vertical: 10,
                                           ),
-                                          child: Image(
-                                            fit: BoxFit.contain,
-                                            image: NetworkImage(
-                                              recipes[0]
-                                                  .extendedIngredients![index]
-                                                  .image!,
+                                          color: Theme.of(context)
+                                              .secondaryHeaderColor,
+                                          child: ListTile(
+                                            title: Text(
+                                              ingredient.name.toString(),
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            leading: Container(
+                                              width: 50,
+                                              height: 50,
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: 10,
+                                              ),
+                                              child: Image(
+                                                fit: BoxFit.contain,
+                                                image: NetworkImage(
+                                                  FoodAppConfig.instance!.values
+                                                          .imagesUrl! +
+                                                      ingredient.image!,
+                                                ),
+                                              ),
+                                            ),
+                                            trailing: Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: 4,
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  const Text('amount'),
+                                                  Text(
+                                                    '${ingredient.amount.toString()} ${ingredient.unit}',
+                                                    style: const TextStyle(
+                                                      color: Colors.red,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        trailing: Container(
-                                          margin: const EdgeInsets.symmetric(
-                                            vertical: 4,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              const Text('amount'),
-                                              Text(
-                                                '${recipes[0].extendedIngredients![index].amount.toString()} ${recipes[0].extendedIngredients![index].unit}',
-                                                style: const TextStyle(
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ),
+                                    )
+                                    .toList(),
                               ),
                               Container(
                                 width:

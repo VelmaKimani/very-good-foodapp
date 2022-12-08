@@ -43,13 +43,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
-  assets:
-    - lib/assets/smoothy1.jpg
 
 
 analyzer:
   strong-mode: true
   language:
     enableSuperMixins: true
-
- 
+    

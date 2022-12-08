@@ -13,6 +13,8 @@ fmt:
 apk:
 		flutter build apk  --flavor production --target lib/main_production.dart -vv
 
+		flutter build apk --debug --flavor development --target lib/main_development.dart
+
 apk-stg:
 		flutter build apk  --flavor staging --target lib/main_staging.dart
 
