@@ -3,6 +3,7 @@ part of foodapp_services;
 abstract class RecipesService {
   Future<RecipeList> getRandomRecipes();
   Future<RecipeList> getInformationRecipes();
+  Future<SearchList> searchRecipe();
 }
 
 class RecipesServiceImplementation implements RecipesService {
@@ -10,6 +11,7 @@ class RecipesServiceImplementation implements RecipesService {
   final _allRandomRecipes = FoodAppConfig.instance!.values.randomRecipeUrl;
   final _allInformationRecipe =
       FoodAppConfig.instance!.values.informationRecipe;
+  final _searchRecipe = FoodAppConfig.instance!.values.searchRecipe;
 
   @override
   Future<RecipeList> getRandomRecipes() async {
@@ -23,6 +25,24 @@ class RecipesServiceImplementation implements RecipesService {
       Logger().i(resp);
 
       return RecipeList.fromJson(resp);
+    } catch (e) {
+      Logger().e(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<SearchList> searchRecipe() async {
+    final recipesUrl = '$_baseUrl$_searchRecipe';
+
+    try {
+      final resp = await _networkUtil.getReq(
+        recipesUrl,
+      );
+
+      Logger().i(resp);
+
+      return SearchList.fromJson(resp);
     } catch (e) {
       Logger().e(e.toString());
       rethrow;

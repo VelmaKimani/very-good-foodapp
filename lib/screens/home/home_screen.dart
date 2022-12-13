@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:foodapp/screens/home/get_random_recipes_cubit.dart';
+import 'package:foodapp/screens/search/get_search_recipe_cubit.dart';
 import 'package:foodapp/utils/_index.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,8 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: SafeArea(
+    return Scaffold(
+      body: SafeArea(
         child: ColoredBox(
           color: Theme.of(context).secondaryHeaderColor,
           child: BlocBuilder<GetRandomRecipesCubit, GetRandomRecipesState>(
@@ -36,15 +37,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 loaded: (recipes) => Column(
                   children: [
-                    Center(
-                      child: Text(
-                        recipes[0].title!,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          recipes[0].title!,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              FoodAppRouter.searchRoute,
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.arrow_right_alt_outlined,
+                            size: 35,
+                          ),
+                        )
+                      ],
                     ),
                     Container(
                       margin: const EdgeInsets.only(bottom: 10, top: 10),
@@ -64,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         topRight: Radius.circular(30),
                       ),
                       child: Container(
-                        height: MediaQuery.of(context).size.width * 1.438,
+                        height: MediaQuery.of(context).size.width * 1.375,
                         color: Colors.white,
                         child: SingleChildScrollView(
                           child: Column(

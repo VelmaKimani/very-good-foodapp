@@ -14,5 +14,10 @@ class Singletons {
             recipesService: _recipesService,
           ),
         ),
+        BlocProvider<GetSearchRecipeCubit>(
+          create: (context) => GetSearchRecipeCubit(
+            recipesService: _recipesService,
+          ),
+        ),
       ];
 }

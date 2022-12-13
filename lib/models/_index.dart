@@ -6,3 +6,4 @@ part 'random_recipe.dart';
 part '_index.freezed.dart';
 part '_index.g.dart';
 part 'errors.dart';
+part 'search_recipe.dart';
