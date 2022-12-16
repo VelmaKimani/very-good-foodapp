@@ -4,6 +4,10 @@ abstract class RecipesService {
   Future<RecipeList> getRandomRecipes();
   Future<RecipeList> getInformationRecipes();
   Future<SearchList> searchRecipe();
+  Future<Recipe> getRecipeIngredients({
+    required List<ExtendedIngredient> extendedIngredient,
+    required String instructions,
+  });
 }
 
 class RecipesServiceImplementation implements RecipesService {
@@ -43,6 +47,28 @@ class RecipesServiceImplementation implements RecipesService {
       Logger().i(resp);
 
       return SearchList.fromJson(resp);
+    } catch (e) {
+      Logger().e(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Recipe> getRecipeIngredients({
+    required List<ExtendedIngredient> extendedIngredient,
+    required String instructions,
+  }) async {
+    final recipesUrl =
+        '$_baseUrl$_allRandomRecipes?with[]=recipes.extendedIngredients&with'
+        '=instructions';
+    try {
+      final resp = await _networkUtil.getReq(
+        recipesUrl,
+      );
+
+      Logger().i(resp);
+
+      return Recipe.fromJson(resp);
     } catch (e) {
       Logger().e(e.toString());
       rethrow;

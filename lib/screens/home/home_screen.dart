@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodapp/models/_index.dart';
 
 import 'package:foodapp/screens/home/get_random_recipes_cubit.dart';
 import 'package:foodapp/screens/search/get_search_recipe_cubit.dart';
@@ -9,6 +10,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
   });
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -19,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<GetRandomRecipesCubit>().getRecipes();
     super.initState();
   }
+
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,32 +41,85 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 loaded: (recipes) => Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          recipes[0].title!,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                    Container(
+                      height: 50,
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 15,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: TextFormField(
+                          cursorColor: Colors.black,
+                          controller: searchController,
+                          decoration: InputDecoration(
+                            hintText: 'Search for recipe',
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                searchController.text;
+                                Navigator.pushNamed(
+                                  context,
+                                  FoodAppRouter.searchResultsRoute,
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.search,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
-                          textAlign: TextAlign.center,
                         ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              FoodAppRouter.searchRoute,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 727,
+                      child: ListView.builder(
+                        itemCount: recipes.length,
+                        itemBuilder: (context, index) => GestureDetector(
+                          child: Card(
+                            child: Column(
+                              children: [
+                                Center(
+                                  child: Text(
+                                    recipes[index].title!,
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(
+                                    bottom: 10,
+                                    top: 10,
+                                  ),
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.55,
+                                  width:
+                                      MediaQuery.of(context).size.height * 0.42,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(32),
+                                    child: Image(
+                                      fit: BoxFit.cover,
+                                      image:
+                                          NetworkImage(recipes[index].image!),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              FoodAppRouter.ingredients,
+                              arguments: recipes[index],
                             );
                           },
-                          icon: const Icon(
-                            Icons.arrow_right_alt_outlined,
-                            size: 35,
-                          ),
-                        )
-                      ],
+                        ),
+                      ),
                     ),
-                    Container(
+                    /* Container(
                       margin: const EdgeInsets.only(bottom: 10, top: 10),
                       height: MediaQuery.of(context).size.width * 0.55,
                       width: MediaQuery.of(context).size.height * 0.42,
@@ -70,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(32),
                         child: Image(
                           fit: BoxFit.cover,
-                          image: NetworkImage(recipes[0].image!),
+                          image: NetworkImage(recipes[index].image!),
                         ),
                       ),
                     ),
@@ -80,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         topRight: Radius.circular(30),
                       ),
                       child: Container(
-                        height: MediaQuery.of(context).size.width * 1.375,
+                        height: MediaQuery.of(context).size.width * 1.255,
                         color: Colors.white,
                         child: SingleChildScrollView(
                           child: Column(
@@ -109,17 +166,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       horizontal: 15,
                                     ),
                                     child: Text(
-                                      'Servings ${recipes[0].servings.toString()}',
+                                      'Servings ${recipes[index].servings.toString()}',
                                     ),
                                   ),
                                 ],
                               ),
                               Column(
-                                children: recipes[0]
+                                children: recipes[index]
                                     .extendedIngredients!
                                     .map(
                                       (ingredient) => SizedBox(
-                                        height: 90,
                                         child: Card(
                                           margin: const EdgeInsets.symmetric(
                                             horizontal: 15,
@@ -217,17 +273,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                           horizontal: 10,
                                           vertical: 2,
                                         ),
-                                        child: Text(recipes[0].instructions!),
+                                        child: Text(recipes[index].instructions!),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
+                              ), 
                             ],
                           ),
                         ),
                       ),
-                    ),
+                    ), */
                   ],
                 ),
                 error: (String message) {

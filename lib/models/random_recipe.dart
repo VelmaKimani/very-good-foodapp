@@ -12,7 +12,7 @@ class RecipeList with _$RecipeList {
 
 @freezed
 class Recipe with _$Recipe {
-  factory Recipe(
+  factory Recipe({
     bool? vegetarian,
     bool? vegan,
     bool? glutenFree,
@@ -49,7 +49,7 @@ class Recipe with _$Recipe {
     List<AnalyzedInstruction>? analyzedInstructions,
     dynamic originalId,
     String? spoonacularSourceUrl,
-  ) = _Recipe;
+  }) = _Recipe;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 }
