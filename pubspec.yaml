@@ -26,11 +26,13 @@ dependencies:
   json_annotation: ^4.7.0
   json_serializable: ^6.5.4
   logger: ^1.1.0
+  device_preview: ^1.1.0
+
 
 dev_dependencies:
   bloc_test: ^9.1.0
   build_runner: ^2.3.0
-  device_preview: ^1.1.0
+  
 
   flutter_test:
     sdk: flutter

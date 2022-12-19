@@ -20,13 +20,10 @@ class FoodAppRouter {
           const SearchResultsScreen(),
         );
       case ingredients:
-        // ignore: cast_nullable_to_non_nullable
-        final recipes = <Recipe>[];
-        final extendedIngredients = <ExtendedIngredient>[];
+        final ingredients = _args as Recipe;
         return _route(
           Ingredients(
-            recipes: recipes,
-            extendedIngredients: extendedIngredients,
+            recipe: ingredients,
           ),
         );
       default:
