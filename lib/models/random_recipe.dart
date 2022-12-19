@@ -38,7 +38,7 @@ class Recipe with _$Recipe {
     int? readyInMinutes,
     int? servings,
     String? sourceUrl,
-    String? image,
+    required String image,
     String? imageType,
     String? summary,
     List<String>? cuisines,
@@ -102,7 +102,7 @@ class Length with _$Length {
 
 @freezed
 class ExtendedIngredient with _$ExtendedIngredient {
-  factory ExtendedIngredient(
+  factory ExtendedIngredient({
     int? id,
     String? aisle,
     String? image,
@@ -115,7 +115,7 @@ class ExtendedIngredient with _$ExtendedIngredient {
     String? unit,
     List<String>? meta,
     Measures? measures,
-  ) = _ExtendedIngredient;
+  }) = _ExtendedIngredient;
 
   factory ExtendedIngredient.fromJson(Map<String, dynamic> json) =>
       _$ExtendedIngredientFromJson(json);

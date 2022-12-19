@@ -32,14 +32,14 @@ class Failure implements Exception {
   List<FoodAppFieldValidationError> errors;
 
   List<String> errorMessages() {
-    final _errors = <String>[];
+    final messageErrors = <String>[];
 
-    for (final _error in errors) {
-      _errors.add(
-        _error.errors[0],
+    for (final messageError in errors) {
+      messageErrors.add(
+        messageError.errors[0],
       );
     }
 
-    return List.castFrom<dynamic, String>(_errors);
+    return List.castFrom<dynamic, String>(messageErrors);
   }
 }

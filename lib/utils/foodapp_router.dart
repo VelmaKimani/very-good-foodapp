@@ -7,7 +7,7 @@ class FoodAppRouter {
   static const String ingredients = '/ingredients';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final _args = settings.arguments;
+    final args = settings.arguments;
 
     switch (settings.name) {
       case homeRoute:
@@ -20,10 +20,10 @@ class FoodAppRouter {
           const SearchResultsScreen(),
         );
       case ingredients:
-        final ingredients = _args as Recipe;
+        final ingredients = args as Recipe?;
         return _route(
           Ingredients(
-            recipe: ingredients,
+            recipe: ingredients!,
           ),
         );
       default:

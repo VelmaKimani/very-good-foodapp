@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:foodapp/models/_index.dart';
-import 'package:foodapp/screens/home/get_random_recipes_cubit.dart';
 import 'package:foodapp/utils/_index.dart';
 
 class Ingredients extends StatefulWidget {
