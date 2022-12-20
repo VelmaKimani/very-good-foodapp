@@ -1,21 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:foodapp/screens/search/get_search_recipe_cubit.dart';
 
 class SearchResultsScreen extends StatefulWidget {
-  const SearchResultsScreen({super.key});
+  const SearchResultsScreen({
+    super.key,
+    required this.searching,
+  });
+
+  final String searching;
 
   @override
   State<SearchResultsScreen> createState() => _SearchResultsScreenState();
 }
 
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
-  @override
-  void initState() {
-    context.read<GetSearchRecipeCubit>().getSearchRecipe();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +27,14 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         child: BlocBuilder<GetSearchRecipeCubit, GetSearchRecipeState>(
           builder: (context, state) {
             return state.when(
-              initial: () => const Center(
-                child: Text('Loading'),
-              ),
+              initial: () => const Center(child: Text('Loading...')),
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
               loaded: (results) => SizedBox(
                 height: 1010,
                 child: ListView.builder(
-                  itemCount: results.length,
+                  itemCount: widget.searching.length,
                   itemBuilder: (context, index) => Card(
                     child: Column(
                       children: [
@@ -45,7 +44,10 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(bottom: 10, top: 10),
+                          margin: const EdgeInsets.only(
+                            bottom: 10,
+                            top: 10,
+                          ),
                           height: MediaQuery.of(context).size.width * 0.55,
                           width: MediaQuery.of(context).size.height * 0.42,
                           child: ClipRRect(
@@ -61,9 +63,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                   ),
                 ),
               ),
-              error: (String message) {
-                return const Text('Error displaying searched recipe');
-              },
+              error: (error) => Center(child: Text(error)),
             );
           },
         ),

@@ -28,7 +28,6 @@ dependencies:
   json_serializable: ^6.5.4
   logger: ^1.1.0
 
-
 dev_dependencies:
   bloc_test: ^9.1.0
   build_runner: ^2.3.0
@@ -51,4 +50,7 @@ analyzer:
   strong-mode: true
   language:
     enableSuperMixins: true
-    
+
+flutter_intl:
+  enabled: true
+  class_name: AppLocalizations

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/l10n/l10n.dart';
 import 'package:foodapp/models/_index.dart';
 import 'package:foodapp/utils/_index.dart';
 
@@ -59,6 +60,7 @@ class _IngredientsState extends State<Ingredients> {
               children: widget.recipe.extendedIngredients!
                   .map(
                     (ingredient) => SizedBox(
+                      height: 80,
                       child: Card(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 15,
@@ -94,7 +96,10 @@ class _IngredientsState extends State<Ingredients> {
                               children: [
                                 const Text('amount'),
                                 Text(
-                                  '${ingredient.amount.toString()} ${ingredient.unit}',
+                                  AppLocalizations.of(context)!.ingredient(
+                                    '${ingredient.amount!}',
+                                    ingredient.unit!,
+                                  ),
                                   style: const TextStyle(
                                     color: Colors.red,
                                     fontWeight: FontWeight.w500,

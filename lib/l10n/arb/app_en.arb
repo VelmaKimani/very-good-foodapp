@@ -1,7 +1,14 @@
+ 
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+    "ingredient":"{amount} {unit} ",
+    "@ingredient": {
+        "placeholders": {
+                    "amount": {
+                        "type": "String"
+                    },
+                    "unit": {
+                        "type": "String"
+                    }
+                }
+}
 }

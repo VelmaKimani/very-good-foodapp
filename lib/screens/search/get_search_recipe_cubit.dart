@@ -15,7 +15,9 @@ class GetSearchRecipeCubit extends Cubit<GetSearchRecipeState> {
   }
   late RecipesService _recipesService;
 
-  Future<void> getSearchRecipe() async {
+  Future<void> getSearchRecipe({
+    required String seachItem,
+  }) async {
     emit(const GetSearchRecipeState.loading());
     try {
       final result = await _recipesService.searchRecipe();
@@ -26,7 +28,11 @@ class GetSearchRecipeCubit extends Cubit<GetSearchRecipeState> {
       emit(GetSearchRecipeState.error(e.message));
     } catch (e) {
       Logger().e(e.toString());
-      emit(const GetSearchRecipeState.error('Failed to fetch recipes'));
+      emit(
+        const GetSearchRecipeState.error(
+          'Failed to fetch searched recipes',
+        ),
+      );
     }
   }
 }

@@ -1,7 +1,14 @@
+ 
 {
-    "@@locale": "es",
-    "counterAppBarTitle": "Contador",
-    "@counterAppBarTitle": {
-        "description": "Texto mostrado en la AppBar de la página del contador"
-    }
+    "ingredient":"{amount} {unit} ",
+    "@ingredient": {
+        "placeholders": {
+                    "amount": {
+                        "type": "String"
+                    },
+                    "unit": {
+                        "type": "String"
+                    }
+                }
+}
 }
