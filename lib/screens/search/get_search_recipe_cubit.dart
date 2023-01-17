@@ -23,11 +23,7 @@ class GetSearchRecipeCubit extends Cubit<GetSearchRecipeState> {
       final result = await _recipesService.getsearchRecipe(name: name);
       Logger().i(result.results);
 
-      if (result.results.contains(name)) {
-        emit(GetSearchRecipeState.loaded(result.results));
-      } else {
-        Logger().i('results not loaded');
-      }
+      emit(GetSearchRecipeState.loaded(result.results));
     } on Failure catch (e) {
       emit(GetSearchRecipeState.error(e.message));
     } catch (e) {

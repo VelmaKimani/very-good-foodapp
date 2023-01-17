@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Image(
                                             fit: BoxFit.cover,
                                             image: NetworkImage(
-                                              recipes[index].image,
+                                              recipes[index].image ?? '',
                                             ),
                                           ),
                                         ),

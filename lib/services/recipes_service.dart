@@ -11,6 +11,7 @@ abstract class RecipesService {
 class RecipesServiceImplementation implements RecipesService {
   final _baseUrl = FoodAppConfig.instance!.values.baseDomain;
   final _allRandomRecipes = FoodAppConfig.instance!.values.randomRecipeUrl;
+  final _searchRecipe = FoodAppConfig.instance!.values.searchRecipe;
   final _allInformationRecipe =
       FoodAppConfig.instance!.values.informationRecipe;
 
@@ -37,9 +38,9 @@ class RecipesServiceImplementation implements RecipesService {
     required String name,
   }) async {
     try {
-      final searchRecipesUrl = '$_baseUrl/complexSearch';
+      final searchRecipesUrl = '$_baseUrl$_searchRecipe';
       final resp = await _networkUtil.getReq(
-        '$searchRecipesUrl?with[]=cuisine&with[]=query&name=$name',
+        '$searchRecipesUrl$name',
       );
 
       Logger().i(resp);

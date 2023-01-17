@@ -38,7 +38,7 @@ class Recipe with _$Recipe {
     int? readyInMinutes,
     int? servings,
     String? sourceUrl,
-    required String image,
+    String? image,
     String? imageType,
     String? summary,
     List<String>? cuisines,
