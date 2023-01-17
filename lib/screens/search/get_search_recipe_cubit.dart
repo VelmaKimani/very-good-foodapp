@@ -16,14 +16,18 @@ class GetSearchRecipeCubit extends Cubit<GetSearchRecipeState> {
   late RecipesService _recipesService;
 
   Future<void> getSearchRecipe({
-    required String seachItem,
+    required String name,
   }) async {
     emit(const GetSearchRecipeState.loading());
     try {
-      final result = await _recipesService.searchRecipe();
-      Logger().i(result);
+      final result = await _recipesService.getsearchRecipe(name: name);
+      Logger().i(result.results);
 
-      emit(GetSearchRecipeState.loaded(result.results));
+      if (result.results.contains(name)) {
+        emit(GetSearchRecipeState.loaded(result.results));
+      } else {
+        Logger().i('results not loaded');
+      }
     } on Failure catch (e) {
       emit(GetSearchRecipeState.error(e.message));
     } catch (e) {

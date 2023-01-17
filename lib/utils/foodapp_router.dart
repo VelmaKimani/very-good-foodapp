@@ -15,11 +15,8 @@ class FoodAppRouter {
           const HomeScreen(),
         );
       case searchResultsRoute:
-        final search = args as String?;
         return _route(
-          SearchResultsScreen(
-            searching: search!,
-          ),
+          SearchResultsScreen(),
         );
       case ingredients:
         final recipe = args as Recipe?;
