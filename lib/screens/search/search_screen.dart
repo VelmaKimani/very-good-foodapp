@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:foodapp/screens/search/get_search_recipe_cubit.dart';
 
-class SearchResultsScreen extends StatefulWidget {
-  const SearchResultsScreen({
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({
     super.key,
   });
 
   @override
-  State<SearchResultsScreen> createState() => _SearchResultsScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchResultsScreenState extends State<SearchResultsScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
   String searchWord = '';
 

@@ -19,7 +19,6 @@ class DeviceSetUp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (_, __) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        useInheritedMediaQuery: true,
         theme: ThemeData(
           appBarTheme: const AppBarTheme(color: kPrimaryColor),
           primaryColor: kPrimaryColor,

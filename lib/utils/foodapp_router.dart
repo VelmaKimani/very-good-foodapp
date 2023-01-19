@@ -2,13 +2,9 @@ part of foodapp_utils;
 
 class FoodAppRouter {
   static const String homeRoute = '/';
-  static const String instructionsRoute = '/instructionsRoute';
   static const String searchResultsRoute = '/searchResultsRoute';
-  static const String ingredients = '/ingredients';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-
     switch (settings.name) {
       case homeRoute:
         return _route(
@@ -16,14 +12,7 @@ class FoodAppRouter {
         );
       case searchResultsRoute:
         return _route(
-          SearchResultsScreen(),
-        );
-      case ingredients:
-        final recipe = args as Recipe?;
-        return _route(
-          Ingredients(
-            recipe: recipe!,
-          ),
+          SearchScreen(),
         );
       default:
         return _route(

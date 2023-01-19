@@ -88,12 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
-                                onTap: () {
-                                  Navigator.of(context).pushNamed(
-                                    FoodAppRouter.ingredients,
-                                    arguments: recipes[index],
-                                  );
-                                },
                               ),
                             ),
                           ),
