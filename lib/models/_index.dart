@@ -7,3 +7,4 @@ part '_index.freezed.dart';
 part '_index.g.dart';
 part 'errors.dart';
 part 'search_recipe.dart';
+part 'auth.dart';

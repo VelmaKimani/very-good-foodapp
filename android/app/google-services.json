@@ -1,31 +1,39 @@
 {
-    "project_info": {
-        "project_number": "343467297497",
-        "project_id": "very-good-foodapp",
-        "storage_bucket": "very-good-foodapp.appspot.com"
-    },
-    "client": [{
-        "client_info": {
-            "mobilesdk_app_id": "1:343467297497:android:89c293d76610adbd590cc8",
-            "android_client_info": {
-                "package_name": "com.example.verygoodcore.foodapp.dev"
-            }
-        },
-        "oauth_client": [{
-            "client_id": "343467297497-92cfq6s1plsh8s7r3qrfaakdt88rq2oc.apps.googleusercontent.com",
-            "client_type": 3
-        }],
-        "api_key": [{
-            "current_key": "AIzaSyCYvAAD4lKBEyA5Z5Y8ZT5p8op1k9-EYDY"
-        }],
-        "services": {
-            "appinvite_service": {
-                "other_platform_oauth_client": [{
-                    "client_id": "343467297497-92cfq6s1plsh8s7r3qrfaakdt88rq2oc.apps.googleusercontent.com",
-                    "client_type": 3
-                }]
-            }
+  "project_info": {
+    "project_number": "801150249120",
+    "project_id": "foodapp-bf10d",
+    "storage_bucket": "foodapp-bf10d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801150249120:android:c1a2e99702dae3869781c5",
+        "android_client_info": {
+          "package_name": "com.velma.foodapp"
         }
-    }],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "801150249120-43rsupdvbb87jp2laa61g06fintrdgnd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDx9jxn6qdvZQBIjvgwad_oKual2fjWw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801150249120-43rsupdvbb87jp2laa61g06fintrdgnd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

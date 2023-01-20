@@ -31,6 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, FoodAppRouter.searchResultsRoute),
             icon: Icon(Icons.more_vert),
           ),
+          IconButton(
+            onPressed: () =>
+                Navigator.pushNamed(context, FoodAppRouter.signUpRoute),
+            icon: Icon(Icons.home),
+          ),
         ],
       ),
       body: SafeArea(
