@@ -17,6 +17,7 @@ abstract class AuthService {
 
 class AuthServiceImplementation implements AuthService {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
   final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: [
       'profile',
@@ -31,37 +32,25 @@ class AuthServiceImplementation implements AuthService {
     required String password,
   }) async {
     try {
-      UserCredential user = await auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      user = userCredential.user;
+
       FirebaseFirestore.instance
           .collection("users")
-          .doc(user.user!.uid)
+          .doc(user!.uid)
           .set({"name": name, "email": email, "password": password});
-
-      auth.authStateChanges().listen((User? user) {
-        if (user == null) {
-          print('User is currently signed out!');
-        } else {
-          print('User is signed in!');
-        }
-      });
-
-      if (user.user!.uid.isNotEmpty) {
-        Logger().i(user);
-        return Future.value(
-          Users(
-            name: name,
-            email: email,
-            password: password,
-          ),
-        );
-      } else {
-        return throw Exception('An error occured');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
       }
     } catch (e) {
-      Logger().e(e.toString());
-      rethrow;
+      print(e);
     }
+    return Users();
   }
 
   @override

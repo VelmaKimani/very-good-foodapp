@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodapp/authentication/google%20sign%20in/google_sign_in_cubit.dart';
 import 'package:foodapp/authentication/sign%20up/signup_cubit.dart';
 import 'package:foodapp/utils/_index.dart';
 
@@ -19,11 +18,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: BlocBuilder<GoogleSignInCubit, GoogleSignInState>(
+        child: BlocBuilder<SignupCubit, SignupState>(
           builder: (context, state) {
             return state.when(
               initial: () => const Center(
@@ -151,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               .pushNamed(FoodAppRouter.homeRoute);
                         },
                         child: const Text(
-                          'Register',
+                          'Sign Up',
                           style: TextStyle(fontSize: 17),
                         ),
                       ),
