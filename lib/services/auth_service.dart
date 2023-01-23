@@ -11,19 +11,56 @@ abstract class AuthService {
     required String password,
   });
 
-  Future<Users> signInWithGoogle();
+  Future<Users?> signInWithGoogle();
   Future<void> logOut();
+  Future<Users> firebaseSignUp({required Users users});
 }
 
 class AuthServiceImplementation implements AuthService {
   final FirebaseAuth auth = FirebaseAuth.instance;
   User? user;
+  final _firebaseAuth = FoodAppConfig.instance!.values.firebaseUrl;
   final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: [
       'profile',
       'email',
     ],
   );
+
+  @override
+  Future<Users> firebaseSignUp({required Users users}) async {
+    try {
+      final authUrl = _firebaseAuth;
+
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+          email: users.email!, password: users.password!);
+
+      user = userCredential.user;
+
+       FirebaseFirestore.instance
+          .collection("users")
+          .doc(user!.uid)
+          .set({
+        "name": users.name,
+        "email": users.email,
+        "password": users.password
+      }) ;
+      final resp = await _networkUtil.postReq(
+        authUrl,
+        body: '',
+      );
+
+      Logger().i(resp);
+      return Users(
+        name: users.name,
+        email: users.email,
+        password: users.password,
+      );
+    } catch (e) {
+      Logger().e(e.toString());
+      rethrow;
+    }
+  }
 
   @override
   Future<Users> signUp({
