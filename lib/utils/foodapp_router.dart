@@ -37,11 +37,8 @@ class FoodAppRouter {
           GoogleSignInScreen(),
         );
       case loginRoute:
-        final recipe = args as Recipe?;
         return _route(
-          LoginScreen(
-            recipe: recipe!
-          ),
+          LoginScreen(),
         );
       case logoutRoute:
         return _route(
