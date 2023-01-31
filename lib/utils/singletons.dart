@@ -15,8 +15,8 @@ class Singletons {
             recipesService: _recipesService,
           ),
         ),
-        BlocProvider<SignupCubit>(
-          create: (context) => SignupCubit(
+        BlocProvider<SignUpCubit>(
+          create: (context) => SignUpCubit(
             authService: _authService,
           ),
         ),
@@ -30,5 +30,10 @@ class Singletons {
             authService: _authService,
           ),
         ),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(
+            authService: _authService,
+          ),
+        )
       ];
 }

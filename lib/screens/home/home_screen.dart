@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:foodapp/screens/app_drawer.dart';
 import 'package:foodapp/screens/home/get_random_recipes_cubit.dart';
 import 'package:foodapp/utils/_index.dart';
 
@@ -25,19 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Random Recipes'),
-        actions: [
-          IconButton(
-            onPressed: () =>
-                Navigator.pushNamed(context, FoodAppRouter.searchResultsRoute),
-            icon: Icon(Icons.more_vert),
-          ),
-          IconButton(
-            onPressed: () =>
-                Navigator.pushNamed(context, FoodAppRouter.signUpRoute),
-            icon: Icon(Icons.home),
-          ),
-        ],
       ),
+      drawer: AppDrawer(),
       body: SafeArea(
         child: ColoredBox(
           color: Theme.of(context).secondaryHeaderColor,
@@ -93,6 +83,69 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
+                                onTap: () {
+                                  final auth = FirebaseAuth.instance;
+                                  final user = auth.currentUser;
+
+                                  if (user != null) {
+                                    Navigator.of(context).pushNamed(
+                                      FoodAppRouter.ingredientsRoute,
+                                      arguments: recipes[index],
+                                    );
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (builder) => AlertDialog(
+                                        title: const Text(
+                                            "You are not logged in. Please log in."),
+                                        content: const Text(
+                                            "Don't have an account? Sign Up"),
+                                        actions: [
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  ElevatedButton(
+                                                    onPressed: () => Navigator
+                                                            .of(context)
+                                                        .pushNamed(FoodAppRouter
+                                                            .signUpRoute),
+                                                    child:
+                                                        const Text("Sign Up"),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(
+                                                                  Colors.cyan),
+                                                    ),
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () =>
+                                                        Navigator.of(context)
+                                                            .pushNamed(
+                                                      FoodAppRouter.loginRoute,
+                                                      arguments: recipes[index],
+                                                    ),
+                                                    child: const Text("Log In"),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(
+                                                                  Colors.cyan),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ),
                           ),

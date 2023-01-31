@@ -1,56 +1,37 @@
 part of foodapp_services;
 
 abstract class AuthService {
-  Future<Users> signUp({
-    required String name,
-    required String email,
-    required String password,
-  });
-  Future<Users> login({
-    required String email,
-    required String password,
-  });
-
+  Future<Users> signUp({required Users users});
   Future<Users?> signInWithGoogle();
+  Future<Users> login({required String email, required String password});
   Future<void> logOut();
-  Future<Users> firebaseSignUp({required Users users});
 }
 
 class AuthServiceImplementation implements AuthService {
   final FirebaseAuth auth = FirebaseAuth.instance;
   User? user;
-  final _firebaseAuth = FoodAppConfig.instance!.values.firebaseUrl;
+  final firebaseAuth = FoodAppConfig.instance!.values.firebaseUrl;
   final GoogleSignIn googleSignIn = GoogleSignIn(
     scopes: [
-      'profile',
       'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
     ],
   );
 
   @override
-  Future<Users> firebaseSignUp({required Users users}) async {
+  Future<Users> signUp({required Users users}) async {
     try {
-      final authUrl = _firebaseAuth;
-
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: users.email!, password: users.password!);
 
       user = userCredential.user;
 
-       FirebaseFirestore.instance
-          .collection("users")
-          .doc(user!.uid)
-          .set({
+      FirebaseFirestore.instance.collection("users").doc(user!.uid).set({
         "name": users.name,
         "email": users.email,
         "password": users.password
-      }) ;
-      final resp = await _networkUtil.postReq(
-        authUrl,
-        body: '',
-      );
+      });
 
-      Logger().i(resp);
       return Users(
         name: users.name,
         email: users.email,
@@ -63,43 +44,15 @@ class AuthServiceImplementation implements AuthService {
   }
 
   @override
-  Future<Users> signUp({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
-    try {
-      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-
-      user = userCredential.user;
-
-      FirebaseFirestore.instance
-          .collection("users")
-          .doc(user!.uid)
-          .set({"name": name, "email": email, "password": password});
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
-    }
-    return Users();
-  }
-
-  @override
   Future<Users> signInWithGoogle() async {
     try {
-      final googleSignInAccount = await googleSignIn.signIn();
-      final googleSignInAuthentication =
-          await googleSignInAccount?.authentication;
+      final _googleSignInAccount = await googleSignIn.signIn();
+      final _googleSignInAuthentication =
+          await _googleSignInAccount?.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication?.idToken,
-        accessToken: googleSignInAuthentication?.accessToken,
+        idToken: _googleSignInAuthentication?.idToken,
+        accessToken: _googleSignInAuthentication?.accessToken,
       );
 
       final _authResult = await auth.signInWithCredential(credential);
@@ -124,17 +77,78 @@ class AuthServiceImplementation implements AuthService {
       rethrow;
     }
   }
+  /* @override
+  Future<Users> signInWithGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
+    );
+    try {
+      final googleSignInAccount = await googleSignIn.signIn();
+      final googleSignInAuthentication =
+          await googleSignInAccount?.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication?.idToken,
+        accessToken: googleSignInAuthentication?.accessToken,
+      );
+
+      final _authResult = await auth.signInWithCredential(credential);
+
+      final _user = _authResult.user;
+
+      if (_user != null) {
+        Logger().i(_user);
+        assert(!_user.isAnonymous, 'User must not be anonymous');
+
+        return Future.value(
+          Users(
+            email: _user.email,
+            name: _user.displayName,
+          ),
+        );
+      } else {
+        return throw Exception('An error occured');
+      }
+    } catch (e) {
+      Logger().e(e.toString());
+      rethrow;
+    }
+  } */
 
   @override
   Future<Users> login({
     required String email,
     required String password,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+    final resp = await auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    Logger().i(resp);
+    return Users(
+      email: email,
+      password: password,
+    );
   }
 
   @override
   Future<void> logOut() async {
-    await auth.signOut();
+    try {
+      await auth.signOut();
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 }

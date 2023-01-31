@@ -1,34 +1,50 @@
 {
   "project_info": {
-    "project_number": "801150249120",
-    "project_id": "foodapp-bf10d",
-    "storage_bucket": "foodapp-bf10d.appspot.com"
+    "project_number": "1087088507796",
+    "firebase_url": "https://foodapp-2c2cc-default-rtdb.firebaseio.com",
+    "project_id": "foodapp-2c2cc",
+    "storage_bucket": "foodapp-2c2cc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:801150249120:android:c1a2e99702dae3869781c5",
+        "mobilesdk_app_id": "1:1087088507796:android:57697887ce96ebfb592d81",
         "android_client_info": {
-          "package_name": "com.velma.foodapp"
+          "package_name": "com.example.verygoodcore.foodapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "801150249120-43rsupdvbb87jp2laa61g06fintrdgnd.apps.googleusercontent.com",
+          "client_id": "1087088507796-p46rgsn7ncka5280idm17ovb2o6qa9l8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.foodapp",
+            "certificate_hash": "13ad1fa88a3e76184286c4ba2fe321e1e8a8fee5"
+          }
+        },
+        {
+          "client_id": "1087088507796-mhe9vnem6btafgi42fb1rv8373r0htdq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCDx9jxn6qdvZQBIjvgwad_oKual2fjWw0"
+          "current_key": "AIzaSyCDtvxvyXa2vxFazYE45EdLaehdgrIHVRE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "801150249120-43rsupdvbb87jp2laa61g06fintrdgnd.apps.googleusercontent.com",
+              "client_id": "1087088507796-5e22uu39ecimklbktko6op87ueevorus.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1087088507796-cus999s6mv6olevaa7r8e86tr3f8gb8n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.verygoodcore.foodapp"
+              }
             }
           ]
         }

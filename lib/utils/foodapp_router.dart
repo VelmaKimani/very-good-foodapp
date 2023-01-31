@@ -2,17 +2,27 @@ part of foodapp_utils;
 
 class FoodAppRouter {
   static const String homeRoute = '/';
+  static const String ingredientsRoute = '/ingredientsRoute';
   static const String searchResultsRoute = '/searchResultsRoute';
   static const String signUpRoute = '/signUpRoute';
   static const String googleSignInRoute = '/googleSignInRoute';
   static const String landingRoute = '/landingRoute';
   static const String successRoute = '/successRoute';
+  static const String loginRoute = '/loginRoute';
+  static const String logoutRoute = '/logoutRoute';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    final args = settings.arguments;
+
     switch (settings.name) {
       case homeRoute:
         return _route(
           const HomeScreen(),
+        );
+      case ingredientsRoute:
+        final recipe = args as Recipe?;
+        return _route(
+          Ingredients(recipe: recipe!),
         );
       case searchResultsRoute:
         return _route(
@@ -25,6 +35,17 @@ class FoodAppRouter {
       case googleSignInRoute:
         return _route(
           GoogleSignInScreen(),
+        );
+      case loginRoute:
+        final recipe = args as Recipe?;
+        return _route(
+          LoginScreen(
+            recipe: recipe!
+          ),
+        );
+      case logoutRoute:
+        return _route(
+          LogoutScreen(),
         );
       case landingRoute:
         return _route(

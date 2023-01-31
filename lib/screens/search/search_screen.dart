@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:foodapp/screens/search/get_search_recipe_cubit.dart';
 
 class SearchScreen extends StatefulWidget {

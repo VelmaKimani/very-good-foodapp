@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodapp/authentication/cubit/firebase_sign_up_cubit.dart';
-import 'package:foodapp/authentication/sign%20up/signup_cubit.dart';
+import 'package:foodapp/authentication/sign%20up/sign_up_cubit.dart';
 import 'package:foodapp/utils/_index.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -131,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 borderRadius: BorderRadius.circular(10.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    context.read<FirebaseSignUpCubit>().firebaseSignUp(
+                    context.read<SignUpCubit>().signUp(
                           name: nameController.text,
                           email: emailController.text,
                           password: passwordController.text,
