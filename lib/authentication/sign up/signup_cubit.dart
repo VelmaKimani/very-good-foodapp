@@ -38,5 +38,4 @@ class SignupCubit extends Cubit<SignupState> {
       emit(const SignupState.error('Failed to sign up'));
     }
   }
-  
 }
