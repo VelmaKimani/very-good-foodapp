@@ -4,15 +4,15 @@ import 'package:foodapp/services/_index.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
 
-part 'signup_state.dart';
-part 'signup_cubit.freezed.dart';
+part 'sign_up_state.dart';
+part 'sign_up_cubit.freezed.dart';
 
-class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({required AuthService authService})
-      : super(const SignupState.initial()) {
+class SignUpCubit extends Cubit<SignUpState> {
+  SignUpCubit({
+    required AuthService authService,
+  }) : super(const SignUpState.initial()) {
     _authService = authService;
   }
-
   late AuthService _authService;
 
   Future<void> signUp({
@@ -20,7 +20,7 @@ class SignupCubit extends Cubit<SignupState> {
     required String email,
     required String password,
   }) async {
-    emit(const SignupState.loading());
+    emit(const SignUpState.loading());
     try {
       final result = await _authService.signUp(
         users: Users(
@@ -31,12 +31,12 @@ class SignupCubit extends Cubit<SignupState> {
       );
       Logger().i(result);
 
-      emit(SignupState.loaded(result));
+      emit(const SignUpState.loaded());
     } on Failure catch (e) {
-      emit(SignupState.error(e.message));
+      emit(SignUpState.error(e.message));
     } catch (e) {
       Logger().e(e.toString());
-      emit(const SignupState.error('Failed to sign up'));
+      emit(const SignUpState.error('Failed to post user'));
     }
   }
 }

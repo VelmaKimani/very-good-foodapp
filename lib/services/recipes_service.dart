@@ -1,8 +1,8 @@
-part of foodapp_services;
+part of '_index.dart';
 
 abstract class RecipesService {
   Future<RecipeList> getRandomRecipes();
-  Future<RecipeList> getInformationRecipes();
+  Future<RecipeInformation> getInformationRecipes();
   Future<SearchList> getsearchRecipe({
     required String name,
   });
@@ -53,7 +53,7 @@ class RecipesServiceImplementation implements RecipesService {
   }
 
   @override
-  Future<RecipeList> getInformationRecipes() async {
+  Future<RecipeInformation> getInformationRecipes() async {
     final recipesUrl = '$_baseUrl$_allInformationRecipe';
 
     try {
@@ -63,7 +63,7 @@ class RecipesServiceImplementation implements RecipesService {
 
       Logger().i(resp);
 
-      return RecipeList.fromJson(resp);
+      return RecipeInformation.fromJson(resp);
     } catch (e) {
       Logger().e(e.toString());
       rethrow;

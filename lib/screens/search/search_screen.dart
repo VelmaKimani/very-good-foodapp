@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:foodapp/screens/information/get_info_recipes_cubit.dart';
 import 'package:foodapp/screens/search/get_search_recipe_cubit.dart';
+import 'package:foodapp/utils/_index.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({
@@ -38,8 +39,8 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
-                onSubmitted: ((value) {
-                  FocusScopeNode currentFocus = FocusScope.of(context);
+                onSubmitted: (value) {
+                  final currentFocus = FocusScope.of(context);
                   if (!currentFocus.hasPrimaryFocus &&
                       currentFocus.focusedChild != null) {
                     currentFocus.unfocus();
@@ -48,8 +49,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       ? context
                           .read<GetSearchRecipeCubit>()
                           .getSearchRecipe(name: searchController.text)
+                      // ignore: unnecessary_statements
                       : null;
-                }),
+                },
                 cursorColor: Colors.black,
                 controller: searchController,
                 keyboardType: TextInputType.name,
@@ -59,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   border: InputBorder.none,
                   suffixIcon: IconButton(
                     onPressed: () {
-                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      final currentFocus = FocusScope.of(context);
                       if (!currentFocus.hasPrimaryFocus &&
                           currentFocus.focusedChild != null) {
                         currentFocus.unfocus();
@@ -68,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           .read<GetSearchRecipeCubit>()
                           .getSearchRecipe(name: searchController.text);
                     },
-                    icon: Icon(Icons.search),
+                    icon: const Icon(Icons.search),
                   ),
                 ),
                 onChanged: (search) {
@@ -117,7 +119,13 @@ class _SearchScreenState extends State<SearchScreen> {
                           ],
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        context.read<GetInfoRecipesCubit>().getInfoRecipes();
+                        Navigator.of(context).pushNamed(
+                          FoodAppRouter.informationRoute,
+                          arguments: results[index],
+                        );
+                      },
                     ),
                   ),
                   error: (error) => Center(child: Text(error)),

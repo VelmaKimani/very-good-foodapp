@@ -1,13 +1,74 @@
-name: foodapp
+name: Generate Production APK
 
-on: [pull_request, push]
+on:
+  pull_request:
+    branches:
+      - develop
 
 jobs:
-  semantic-pull-request:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
-
   build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
-    with:
-      flutter_channel: stable
-      flutter_version: 3.3.8
+    runs-on: ubuntu-latest
+    outputs:
+      app: app/build/outputs/apk/debug
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3"
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Install Dependencies
+        run: flutter packages get
+
+      - name: Format
+        run: dart format --set-exit-if-changed lib test
+
+      - name: Code Generation
+        run: flutter packages run build_runner build --delete-conflicting-outputs
+
+      - name: Analyze
+        run: flutter analyze lib
+
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.2
+        with:
+          fileName: key.jks
+          encodedString: ${{ secrets.RELEASE_KEYSTORE }}
+
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+          echo "storePassword=${{ secrets.RELEASE_KEYSTORE_PASSPHRASE }}" >> android/key.properties
+          echo "keyPassword=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.RELEASE_KEYSTORE_ALIAS }}" >> android/key.properties
+
+      - name: Build APK
+        run: flutter build apk  --flavor production --target lib/main_production.dart
+
+        # Upload generated apk to the artifacts.
+      - uses: actions/upload-artifact@v3
+        with:
+          name: production-apk
+          path: build/app/outputs/flutter-apk/app-production-release.apk
+
+        # - name: Run tests
+        #   run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
+
+        # - name: Check Code Coverage
+        #   uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
+      
+
+  maestro-cloud:
+    runs-on: ubuntu-latest
+    outputs:
+      app: app/outputs/flutter-apk/app-production-release.apk
+    steps:
+      - uses: mobile-dev-inc/action-maestro-cloud@v1
+        with:
+          api-key: ${{ secrets.da4c3a02-cbb7-47a7-8809-cb84b04d227c }}
+          app-file: build/app/outputs/flutter-apk/app-production-release.apk
+          
+     

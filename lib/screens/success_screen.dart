@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/utils/_index.dart';
 
-class LandingScreen extends StatefulWidget {
-  const LandingScreen({super.key});
+class SuccessScreen extends StatefulWidget {
+  const SuccessScreen({super.key});
 
   @override
-  State<LandingScreen> createState() => _LandingScreenState();
+  State<SuccessScreen> createState() => _SuccessScreenState();
 }
 
-class _LandingScreenState extends State<LandingScreen> {
+class _SuccessScreenState extends State<SuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,12 +16,12 @@ class _LandingScreenState extends State<LandingScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('You have logged in successfully!!'),
+            const Text('You have registered successfully!!'),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).restorablePushNamedAndRemoveUntil(
+                Navigator.of(context).pushNamedAndRemoveUntil(
                   FoodAppRouter.ingredientsRoute,
-                  (route) => true,
+                  (route) => false,
                 );
               },
               child: const Text('OK'),

@@ -1,4 +1,4 @@
-part of foodapp_models;
+part of '_index.dart';
 
 @freezed
 class FoodAppValidationError with _$FoodAppValidationError {

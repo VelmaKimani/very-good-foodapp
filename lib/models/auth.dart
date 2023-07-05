@@ -1,4 +1,4 @@
-part of foodapp_models;
+part of '_index.dart';
 
 @freezed
 class Users with _$Users {

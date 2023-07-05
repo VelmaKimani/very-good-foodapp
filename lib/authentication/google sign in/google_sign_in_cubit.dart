@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:foodapp/models/_index.dart';
 import 'package:foodapp/services/_index.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logger/logger.dart';
@@ -9,7 +10,7 @@ part 'google_sign_in_cubit.freezed.dart';
 class GoogleSignInCubit extends Cubit<GoogleSignInState> {
   GoogleSignInCubit({
     required AuthService authService,
-  }) : super(GoogleSignInState.initial()) {
+  }) : super(const GoogleSignInState.initial()) {
     _authService = authService;
   }
 
@@ -21,7 +22,7 @@ class GoogleSignInCubit extends Cubit<GoogleSignInState> {
       final result = await _authService.signInWithGoogle();
 
       if (result != null) {
-        emit(GoogleSignInState.loaded());
+        emit(GoogleSignInState.loaded(result));
       }
     } catch (e) {
       emit(const GoogleSignInState.error('Google Sign in failed'));

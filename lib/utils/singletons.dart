@@ -1,4 +1,4 @@
-part of foodapp_utils;
+part of '_index.dart';
 
 class Singletons {
   static final _recipesService = RecipesServiceImplementation();
@@ -15,8 +15,8 @@ class Singletons {
             recipesService: _recipesService,
           ),
         ),
-        BlocProvider<SignupCubit>(
-          create: (context) => SignupCubit(
+        BlocProvider<SignUpCubit>(
+          create: (context) => SignUpCubit(
             authService: _authService,
           ),
         ),
@@ -30,5 +30,10 @@ class Singletons {
             authService: _authService,
           ),
         ),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(
+            authService: _authService,
+          ),
+        )
       ];
 }

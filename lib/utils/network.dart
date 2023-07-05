@@ -1,4 +1,4 @@
-part of foodapp_utils;
+part of '_index.dart';
 
 class NetworkUtil {
   factory NetworkUtil() => _networkUtil;
@@ -15,8 +15,8 @@ class NetworkUtil {
         baseUrl: FoodAppConfig.instance!.values.baseDomain,
         contentType: 'application/json',
         headers: <String, dynamic>{'Accept': 'application/json'},
-        connectTimeout: 60 * 1000,
-        receiveTimeout: 60 * 1000,
+        connectTimeout: const Duration(seconds: 60 * 1000),
+        receiveTimeout: const Duration(seconds: 60 * 1000),
       ),
     );
 
@@ -30,7 +30,7 @@ class NetworkUtil {
       ),
     );
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (client) {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
@@ -66,9 +66,9 @@ class NetworkUtil {
       if (responseBody.isEmpty) return <String, dynamic>{};
       return responseBody;
     } on DioError catch (err) {
-      if (DioErrorType.response == err.type) {
+      if (DioErrorType.badResponse == err.type) {
         logger
-          ..d('Error: ${err.toString()}')
+          ..d('Error: $err')
           ..i('${err.response?.statusCode}')
           ..i('Error: ${err.response?.data}');
 
@@ -81,7 +81,7 @@ class NetworkUtil {
         if (err.response?.statusCode == 401) {
           throw Failure(message: 'Unauthenticated');
         }
-      } else if (DioErrorType.connectTimeout == err.type) {
+      } else if (DioErrorType.connectionTimeout == err.type) {
         throw const SocketException('No internet connection');
       }
       Logger().e(err);
@@ -100,9 +100,9 @@ class NetworkUtil {
       if (responseBody.isEmpty) return <String, dynamic>{};
       return responseBody;
     } on DioError catch (err) {
-      if (DioErrorType.response == err.type) {
+      if (DioErrorType.badResponse == err.type) {
         logger
-          ..d('Error: ${err.toString()}')
+          ..d('Error: $err')
           ..i('${err.response?.statusCode}')
           ..i('Error: ${err.response?.data}');
 
@@ -115,7 +115,7 @@ class NetworkUtil {
         if (err.response?.statusCode == 401) {
           throw Failure(message: 'Unauthenticated');
         }
-      } else if (DioErrorType.connectTimeout == err.type) {
+      } else if (DioErrorType.connectionTimeout == err.type) {
         throw const SocketException('No internet connection');
       }
       throw Failure(message: 'Server error');
@@ -124,9 +124,9 @@ class NetworkUtil {
 
   Future<Map<String, dynamic>> multipartReq(
     String url, {
+    required Map<String, dynamic> body,
     String? filePath,
     String? fileKey,
-    required Map<String, dynamic> body,
   }) async {
     try {
       final formData = FormData.fromMap(body);
@@ -174,9 +174,9 @@ class NetworkUtil {
       if (responseBody.isEmpty) return <String, dynamic>{};
       return responseBody;
     } on DioError catch (err) {
-      if (DioErrorType.response == err.type) {
+      if (DioErrorType.badResponse == err.type) {
         logger
-          ..d('Error: ${err.toString()}')
+          ..d('Error: $err')
           ..i('${err.response?.statusCode}')
           ..i('Error: ${err.response?.data}');
 
@@ -196,7 +196,7 @@ class NetworkUtil {
         if (err.response?.statusCode == 401) {
           throw Failure(message: 'Unauthenticated');
         }
-      } else if (DioErrorType.connectTimeout == err.type) {
+      } else if (DioErrorType.connectionTimeout == err.type) {
         throw Failure(message: 'No internet connection');
       }
       throw Failure(message: 'Server error');
