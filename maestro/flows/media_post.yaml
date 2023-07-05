@@ -1,0 +1,12 @@
+appId: com.shuzia.itestify
+---
+
+- launchApp:
+    appId: "com.shuzia.itestify"
+    stopApp: false
+    clearState: false
+
+- tapOn: "favorite media post"
+- assertVisible: "comment media"
+- assertVisible: "share media"
+- assertVisible: "flag media post"

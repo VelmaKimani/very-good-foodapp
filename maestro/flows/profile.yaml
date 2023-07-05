@@ -1,0 +1,14 @@
+appId: com.shuzia.itestify
+---
+
+- launchApp:
+    appId: "com.shuzia.itestify"
+    stopApp: false
+    clearState: false
+
+- tapOn: "Profile"
+- assertVisible: "Edit Profile"
+- tapOn: "edit profile"
+- assertVisible: "change photo"
+- inputText: "update name"
+- tapOn: "save changes"
