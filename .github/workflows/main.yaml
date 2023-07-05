@@ -3,7 +3,7 @@ name: Generate Production APK
 on:
   pull_request:
     branches:
-      - develop
+      - main
 
 jobs:
   build:
