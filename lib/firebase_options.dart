@@ -2,7 +2,7 @@
 // ignore_for_file: lines_longer_than_80_chars, avoid_classes_with_only_static_members
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+    show TargetPlatform, defaultTargetPlatform, kIsWeb;
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -39,11 +39,12 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      default:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions are not supported for this platform.',
-        );
+      case TargetPlatform.fuchsia:
+        break;
     }
+    throw UnsupportedError(
+      'DefaultFirebaseOptions are not supported for this platform.',
+    );
   }
 
   static const FirebaseOptions web = FirebaseOptions(
@@ -69,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1087088507796',
     projectId: 'foodapp-2c2cc',
     storageBucket: 'foodapp-2c2cc.appspot.com',
-    iosClientId: '1087088507796-cus999s6mv6olevaa7r8e86tr3f8gb8n.apps.googleusercontent.com',
+    iosClientId:
+        '1087088507796-cus999s6mv6olevaa7r8e86tr3f8gb8n.apps.googleusercontent.com',
     iosBundleId: 'com.example.verygoodcore.foodapp',
   );
 }

@@ -9,7 +9,7 @@ part 'login_cubit.freezed.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit({
     required AuthService authService,
-  }) : super(LoginState.initial()) {
+  }) : super(const LoginState.initial()) {
     _authService = authService;
   }
 
@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
 
       Logger().i(result);
 
-      emit(LoginState.loaded());
+      emit(const LoginState.loaded());
     } catch (e) {
       emit(const LoginState.error('Log in failed'));
 

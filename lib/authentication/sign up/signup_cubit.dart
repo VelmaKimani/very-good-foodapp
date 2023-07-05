@@ -8,9 +8,8 @@ part 'signup_state.dart';
 part 'signup_cubit.freezed.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit({
-    required AuthService authService,
-  }) : super(SignupState.initial()) {
+  SignupCubit({required AuthService authService})
+      : super(const SignupState.initial()) {
     _authService = authService;
   }
 
@@ -24,9 +23,11 @@ class SignupCubit extends Cubit<SignupState> {
     emit(const SignupState.loading());
     try {
       final result = await _authService.signUp(
-        name: name,
-        email: email,
-        password: password,
+        users: Users(
+          name: name,
+          email: email,
+          password: password,
+        ),
       );
       Logger().i(result);
 

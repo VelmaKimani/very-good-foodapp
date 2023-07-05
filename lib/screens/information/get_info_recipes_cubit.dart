@@ -15,19 +15,23 @@ class GetInfoRecipesCubit extends Cubit<GetInfoRecipesState> {
   }
   late RecipesService _recipesService;
 
-  Future<void> getRecipes() async {
+  Future<void> getInfoRecipes() async {
     emit(const GetInfoRecipesState.loading());
     try {
       final result = await _recipesService.getInformationRecipes();
 
-      Logger().i(result.recipes);
+      Logger().i(result);
 
-      emit(const GetInfoRecipesState.loaded());
+      emit(GetInfoRecipesState.loaded(result));
     } on Failure catch (e) {
       emit(GetInfoRecipesState.error(e.message));
     } catch (e) {
       Logger().e(e.toString());
-      emit(const GetInfoRecipesState.error('Failed to fetch recipes'));
+      emit(
+        const GetInfoRecipesState.error(
+          'Failed to fetch information ingredients',
+        ),
+      );
     }
   }
 }

@@ -11,13 +11,12 @@ class GoogleSignInScreen extends StatefulWidget {
 }
 
 class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(10),
           child: ElevatedButton(
             onPressed: () {
               context.read<GoogleSignInCubit>().signInwithGoogle();

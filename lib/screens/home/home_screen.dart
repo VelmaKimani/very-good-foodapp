@@ -1,8 +1,11 @@
+// ignore_for_file: inference_failure_on_function_invocation
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodapp/screens/app_drawer.dart';
 import 'package:foodapp/screens/home/get_random_recipes_cubit.dart';
+import 'package:foodapp/screens/information/get_info_recipes_cubit.dart';
 import 'package:foodapp/utils/_index.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,9 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Random Recipes'),
+        title: const Text('Random Recipes'),
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: ColoredBox(
           color: Theme.of(context).secondaryHeaderColor,
@@ -97,54 +100,69 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context: context,
                                       builder: (builder) => AlertDialog(
                                         title: const Text(
-                                            "You are not logged in. Please log in."),
+                                          'You are not logged in.'
+                                          ' Please log in.',
+                                        ),
                                         content: const Text(
-                                            "Don't have an account? Sign Up"),
+                                          "Don't have an account? Sign Up",
+                                        ),
                                         actions: [
                                           Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  ElevatedButton(
-                                                    onPressed: () => Navigator
-                                                            .of(context)
-                                                        .pushNamed(FoodAppRouter
-                                                            .signUpRoute),
-                                                    child:
-                                                        const Text("Sign Up"),
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                                  Colors.cyan),
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 20,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                ElevatedButton(
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                    FoodAppRouter.signUpRoute,
+                                                  ),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all<Color>(
+                                                      Colors.cyan,
                                                     ),
                                                   ),
-                                                  ElevatedButton(
-                                                    onPressed: () =>
-                                                        Navigator.of(context)
-                                                            .pushNamed(
-                                                      FoodAppRouter.loginRoute,
-                                                      arguments: recipes[index],
-                                                    ),
-                                                    child: const Text("Log In"),
-                                                    style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                                  Colors.cyan),
+                                                  child: const Text('Sign Up'),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pushNamed(
+                                                    FoodAppRouter.loginRoute,
+                                                    arguments: recipes[index],
+                                                  ),
+                                                  style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all<Color>(
+                                                      Colors.cyan,
                                                     ),
                                                   ),
-                                                ],
-                                              ))
+                                                  child: const Text('Log In'),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     );
                                   }
+                                },
+                                onDoubleTap: () {
+                                  context
+                                      .read<GetInfoRecipesCubit>()
+                                      .getInfoRecipes();
+                                  Navigator.of(context).pushNamed(
+                                    FoodAppRouter.informationRoute,
+                                    arguments: recipes[index],
+                                  );
                                 },
                               ),
                             ),
@@ -152,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       error: (String message) {
-                        return const Text('Error displaying recipe');
+                        return const Text('Error displaying member data');
                       },
                     );
                   },

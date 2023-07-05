@@ -26,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               child: Padding(
                 padding: EdgeInsets.only(top: 200, right: 220),
                 child: Text('Enter your name'),
@@ -36,21 +36,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 50,
               margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10),
                 color: const Color.fromARGB(33, 97, 44, 250),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 10, top: 5),
                 child: TextFormField(
-                    controller: nameController,
-                    validator: (val) => val!.isEmpty ? 'Enter your name' : null,
-                    onChanged: (val) {
-                      setState(() {
-                        name = val;
-                      });
-                    },
-                    decoration:
-                        const InputDecoration(border: InputBorder.none)),
+                  controller: nameController,
+                  validator: (val) => val!.isEmpty ? 'Enter your name' : null,
+                  onChanged: (val) {
+                    setState(() {
+                      name = val;
+                    });
+                  },
+                  decoration: const InputDecoration(border: InputBorder.none),
+                ),
               ),
             ),
             const SizedBox(
@@ -63,22 +63,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 50,
               margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10),
                 color: const Color.fromARGB(33, 97, 44, 250),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, right: 10, top: 5),
                 child: TextFormField(
-                    controller: emailController,
-                    validator: (val) =>
-                        val!.isEmpty ? 'Enter your email' : null,
-                    onChanged: (val) {
-                      setState(() {
-                        email = val.trim();
-                      });
-                    },
-                    decoration:
-                        const InputDecoration(border: InputBorder.none)),
+                  controller: emailController,
+                  validator: (val) => val!.isEmpty ? 'Enter your email' : null,
+                  onChanged: (val) {
+                    setState(() {
+                      email = val.trim();
+                    });
+                  },
+                  decoration: const InputDecoration(border: InputBorder.none),
+                ),
               ),
             ),
             const SizedBox(
@@ -91,7 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 50,
               margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10),
                 color: const Color.fromARGB(33, 97, 44, 250),
               ),
               child: Padding(
@@ -101,33 +100,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   top: 5,
                 ),
                 child: TextFormField(
-                    controller: passwordController,
-                    decoration: const InputDecoration(border: InputBorder.none),
-                    validator: (val) =>
-                        val!.isEmpty ? 'Enter your password' : null,
-                    onChanged: (val) {
-                      setState(() {
-                        password = val.trim();
-                      });
-                    }),
+                  controller: passwordController,
+                  decoration: const InputDecoration(border: InputBorder.none),
+                  validator: (val) =>
+                      val!.isEmpty ? 'Enter your password' : null,
+                  onChanged: (val) {
+                    setState(() {
+                      password = val.trim();
+                    });
+                  },
+                ),
               ),
             ),
             Container(
-              width: 320.0,
-              height: 70.0,
+              width: 320,
+              height: 70,
               margin: const EdgeInsets.only(top: 20, bottom: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
                     color: Color.fromARGB(63, 198, 198, 198),
-                    offset: Offset(2.0, 4.0),
-                    blurRadius: 10.0,
+                    offset: Offset(2, 4),
+                    blurRadius: 10,
                   )
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10),
                 child: ElevatedButton(
                   onPressed: () {
                     context.read<SignUpCubit>().signUp(

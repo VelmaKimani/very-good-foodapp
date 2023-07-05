@@ -5,8 +5,8 @@ import 'package:foodapp/utils/_index.dart';
 
 class Ingredients extends StatefulWidget {
   const Ingredients({
-    super.key,
     required this.recipe,
+    super.key,
   });
 
   final Recipe recipe;
@@ -51,7 +51,7 @@ class _IngredientsState extends State<Ingredients> {
                     horizontal: 15,
                   ),
                   child: Text(
-                    'Servings ${widget.recipe.servings.toString()}',
+                    'Servings ${widget.recipe.servings}',
                   ),
                 ),
               ],

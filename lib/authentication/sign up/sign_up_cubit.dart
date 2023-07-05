@@ -23,14 +23,15 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(const SignUpState.loading());
     try {
       final result = await _authService.signUp(
-          users: Users(
-        name: name,
-        email: email,
-        password: password,
-      ));
+        users: Users(
+          name: name,
+          email: email,
+          password: password,
+        ),
+      );
       Logger().i(result);
 
-      emit(SignUpState.loaded());
+      emit(const SignUpState.loaded());
     } on Failure catch (e) {
       emit(SignUpState.error(e.message));
     } catch (e) {

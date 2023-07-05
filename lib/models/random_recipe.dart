@@ -1,4 +1,4 @@
-part of foodapp_models;
+part of '_index.dart';
 
 @freezed
 class RecipeList with _$RecipeList {
@@ -121,10 +121,10 @@ class ExtendedIngredient with _$ExtendedIngredient {
       _$ExtendedIngredientFromJson(json);
 }
 
-enum Consistency { SOLID, LIQUID }
+enum Consistency { solid, liquid }
 
 final consistencyValues =
-    EnumValues({'LIQUID': Consistency.LIQUID, 'SOLID': Consistency.SOLID});
+    EnumValues({'liquid': Consistency.liquid, 'solid': Consistency.solid});
 
 @freezed
 class Measures with _$Measures {

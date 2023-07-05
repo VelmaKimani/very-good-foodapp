@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/utils/_index.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,12 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: const Text("More"),
+            title: const Text('More'),
             automaticallyImplyLeading: false,
           ),
           ListTile(
             leading: const Icon(Icons.search),
-            title: const Text("Search for recipes"),
+            title: const Text('Search for recipes'),
             onTap: () {
               Navigator.pushNamed(context, FoodAppRouter.searchResultsRoute);
             },
@@ -26,7 +26,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.person_add),
-            title: const Text("Sign Up"),
+            title: const Text('Sign Up'),
             onTap: () {
               Navigator.pushNamed(context, FoodAppRouter.signUpRoute);
             },
@@ -34,7 +34,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.person),
-            title: const Text("Google Sign In"),
+            title: const Text('Google Sign In'),
             onTap: () {
               Navigator.pushNamed(context, FoodAppRouter.googleSignInRoute);
             },
@@ -42,7 +42,7 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.login),
-            title: const Text("Login"),
+            title: const Text('Login'),
             onTap: () {
               Navigator.pushNamed(context, FoodAppRouter.loginRoute);
             },
@@ -50,10 +50,18 @@ class AppDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text("Log Out"),
+            title: const Text('Log Out'),
             onTap: () {
               logOut();
               Navigator.pushNamed(context, FoodAppRouter.logoutRoute);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.receipt_rounded),
+            title: const Text('Information Recipe'),
+            onTap: () {
+              Navigator.pushNamed(context, FoodAppRouter.informationRoute);
             },
           ),
           const Divider(),
@@ -62,8 +70,8 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
-  void logOut() async {
-    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  Future<void> logOut() async {
+    final firebaseAuth = FirebaseAuth.instance;
     await firebaseAuth.signOut();
   }
 }

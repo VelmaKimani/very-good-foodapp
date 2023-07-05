@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_function_invocation
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,20 +41,21 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 50,
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(10),
               color: const Color.fromARGB(33, 97, 44, 250),
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 10, top: 5),
               child: TextFormField(
-                  controller: emailController,
-                  validator: (val) => val!.isEmpty ? 'Enter your email' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      email = val.trim();
-                    });
-                  },
-                  decoration: const InputDecoration(border: InputBorder.none)),
+                controller: emailController,
+                validator: (val) => val!.isEmpty ? 'Enter your email' : null,
+                onChanged: (val) {
+                  setState(() {
+                    email = val.trim();
+                  });
+                },
+                decoration: const InputDecoration(border: InputBorder.none),
+              ),
             ),
           ),
           const SizedBox(
@@ -65,8 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 50,
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: Color.fromARGB(33, 97, 44, 250),
+              borderRadius: BorderRadius.circular(10),
+              color: const Color.fromARGB(33, 97, 44, 250),
             ),
             child: Padding(
               padding: const EdgeInsets.only(
@@ -75,33 +78,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 top: 5,
               ),
               child: TextFormField(
-                  controller: passwordController,
-                  decoration: const InputDecoration(border: InputBorder.none),
-                  validator: (val) =>
-                      val!.isEmpty ? 'Enter your password' : null,
-                  onChanged: (val) {
-                    setState(() {
-                      password = val.trim();
-                    });
-                  }),
+                controller: passwordController,
+                decoration: const InputDecoration(border: InputBorder.none),
+                validator: (val) => val!.isEmpty ? 'Enter your password' : null,
+                onChanged: (val) {
+                  setState(() {
+                    password = val.trim();
+                  });
+                },
+              ),
             ),
           ),
           Container(
-            width: 350.0,
-            height: 70.0,
+            width: 350,
+            height: 70,
             margin: const EdgeInsets.symmetric(vertical: 20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color.fromARGB(63, 198, 198, 198),
-                    offset: Offset(2.0, 4.0),
-                    blurRadius: 10.0,
-                  ),
-                ],
-                color: Colors.cyan),
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromARGB(63, 198, 198, 198),
+                  offset: Offset(2, 4),
+                  blurRadius: 10,
+                ),
+              ],
+              color: Colors.cyan,
+            ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(10),
               child: ElevatedButton(
                 onPressed: () {
                   final auth = FirebaseAuth.instance;
@@ -118,20 +122,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     showDialog(
                       context: context,
                       builder: (builder) => AlertDialog(
-                        title: const Text("This email account does not exist."),
+                        title: const Text('This email account does not exist.'),
                         content: const Text(
-                            " Please log in with an existing email account."),
+                          ' Please log in with an existing email account.',
+                        ),
                         actions: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: ElevatedButton(
                               onPressed: () => Navigator.of(context).pop(),
-                              child: const Text("OK"),
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.cyan),
+                                  Colors.cyan,
+                                ),
                               ),
+                              child: const Text('OK'),
                             ),
                           ),
                         ],

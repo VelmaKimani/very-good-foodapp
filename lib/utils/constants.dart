@@ -1,4 +1,4 @@
-part of foodapp_utils;
+part of '_index.dart';
 
 class FoodAppValues {
   FoodAppValues({
@@ -6,7 +6,7 @@ class FoodAppValues {
     this.randomRecipeUrl =
         '/random?apiKey=db37873069e14be78379403fb6f758c3&number=15',
     this.informationRecipe =
-        '/{id}/information?db37873069e14be78379403fb6f758c3&includeNutrition=false',
+        '/344/information?apiKey=db37873069e14be78379403fb6f758c3&includeNutrition=false',
     this.imagesUrl = 'https://spoonacular.com/cdn/ingredients_100x100/',
     this.searchRecipe =
         '/complexSearch?apiKey=db37873069e14be78379403fb6f758c3&query=',

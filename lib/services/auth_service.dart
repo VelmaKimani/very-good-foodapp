@@ -1,4 +1,4 @@
-part of foodapp_services;
+part of '_index.dart';
 
 abstract class AuthService {
   Future<Users> signUp({required Users users});
@@ -21,15 +21,17 @@ class AuthServiceImplementation implements AuthService {
   @override
   Future<Users> signUp({required Users users}) async {
     try {
-      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-          email: users.email!, password: users.password!);
+      final userCredential = await auth.createUserWithEmailAndPassword(
+        email: users.email!,
+        password: users.password!,
+      );
 
       user = userCredential.user;
 
-      FirebaseFirestore.instance.collection("users").doc(user!.uid).set({
-        "name": users.name,
-        "email": users.email,
-        "password": users.password
+      await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
+        'name': users.name,
+        'email': users.email,
+        'password': users.password
       });
 
       return Users(
@@ -46,27 +48,27 @@ class AuthServiceImplementation implements AuthService {
   @override
   Future<Users> signInWithGoogle() async {
     try {
-      final _googleSignInAccount = await googleSignIn.signIn();
-      final _googleSignInAuthentication =
-          await _googleSignInAccount?.authentication;
+      final googleSignInAccount = await googleSignIn.signIn();
+      final googleSignInAuthentication =
+          await googleSignInAccount?.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: _googleSignInAuthentication?.idToken,
-        accessToken: _googleSignInAuthentication?.accessToken,
+        idToken: googleSignInAuthentication?.idToken,
+        accessToken: googleSignInAuthentication?.accessToken,
       );
 
-      final _authResult = await auth.signInWithCredential(credential);
+      final authResult = await auth.signInWithCredential(credential);
 
-      final _user = _authResult.user;
+      final user = authResult.user;
 
-      if (_user != null) {
-        Logger().i(_user);
-        assert(!_user.isAnonymous, 'User must not be anonymous');
+      if (user != null) {
+        Logger().i(user);
+        assert(!user.isAnonymous, 'User must not be anonymous');
 
         return Future.value(
           Users(
-            email: _user.providerData[0].email,
-            name: _user.displayName,
+            email: user.providerData[0].email,
+            name: user.displayName,
           ),
         );
       } else {
@@ -121,15 +123,14 @@ class AuthServiceImplementation implements AuthService {
     required String password,
   }) async {
     try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      final userCredential = await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
+      } else if (e.code == 'wrong-password') {}
     }
     final resp = await auth.signInWithEmailAndPassword(
       email: email,

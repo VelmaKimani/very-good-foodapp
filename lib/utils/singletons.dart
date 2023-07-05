@@ -1,4 +1,4 @@
-part of foodapp_utils;
+part of '_index.dart';
 
 class Singletons {
   static final _recipesService = RecipesServiceImplementation();

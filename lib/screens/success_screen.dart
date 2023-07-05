@@ -16,13 +16,15 @@ class _SuccessScreenState extends State<SuccessScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('You have registered successfully!!'),
+            const Text('You have registered successfully!!'),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    FoodAppRouter.ingredientsRoute, (route) => false);
+                  FoodAppRouter.ingredientsRoute,
+                  (route) => false,
+                );
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),

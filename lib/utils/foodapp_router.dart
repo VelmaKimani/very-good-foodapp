@@ -1,4 +1,4 @@
-part of foodapp_utils;
+part of '_index.dart';
 
 class FoodAppRouter {
   static const String homeRoute = '/';
@@ -10,6 +10,7 @@ class FoodAppRouter {
   static const String successRoute = '/successRoute';
   static const String loginRoute = '/loginRoute';
   static const String logoutRoute = '/logoutRoute';
+  static const String informationRoute = '/informationRoute';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -26,31 +27,35 @@ class FoodAppRouter {
         );
       case searchResultsRoute:
         return _route(
-          SearchScreen(),
+          const SearchScreen(),
         );
       case signUpRoute:
         return _route(
-          SignUpScreen(),
+          const SignUpScreen(),
         );
       case googleSignInRoute:
         return _route(
-          GoogleSignInScreen(),
+          const GoogleSignInScreen(),
         );
       case loginRoute:
         return _route(
-          LoginScreen(),
+          const LoginScreen(),
         );
       case logoutRoute:
         return _route(
-          LogoutScreen(),
+          const LogoutScreen(),
         );
       case landingRoute:
         return _route(
-          LandingScreen(),
+          const LandingScreen(),
         );
       case successRoute:
         return _route(
-          SuccessScreen(),
+          const SuccessScreen(),
+        );
+      case informationRoute:
+        return _route(
+          const Information(),
         );
       default:
         return _route(

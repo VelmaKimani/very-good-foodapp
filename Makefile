@@ -10,7 +10,7 @@ gen:
 
 
 fmt:
-		flutter format lib test
+		dart format lib test
 
 apk:
 		flutter build apk  --flavor production --target lib/main_production.dart -vv

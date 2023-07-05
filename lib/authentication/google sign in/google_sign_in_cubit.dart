@@ -10,7 +10,7 @@ part 'google_sign_in_cubit.freezed.dart';
 class GoogleSignInCubit extends Cubit<GoogleSignInState> {
   GoogleSignInCubit({
     required AuthService authService,
-  }) : super(GoogleSignInState.initial()) {
+  }) : super(const GoogleSignInState.initial()) {
     _authService = authService;
   }
 

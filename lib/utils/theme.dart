@@ -1,4 +1,4 @@
-part of foodapp_utils;
+part of '_index.dart';
 
 const kPrimaryColor = Color(0xFF26C6DA);
 const kPrimaryBackgroundColor = Colors.white;
