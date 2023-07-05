@@ -1,0 +1,15 @@
+appId: com.example.verygoodcore.foodapp
+---
+
+- launchApp:
+    appId: "com.example.verygoodcore.foodapp"
+    stopApp: false
+    clearState: true
+
+- tapOn: "Login"
+- assertVisible: "Sign in with Google"
+- tapOn: "Sign in with Google"
+- tapOn: "Velma Kimani"   
+- tapOn: "mobile search appbar icon"
+- tapOn: "search"
+- inputText: "testimony"

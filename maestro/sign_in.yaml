@@ -1,0 +1,17 @@
+
+appId: com.example.verygoodcore.foodapp
+
+env:
+    USERNAME: stanvelma16@gmail.com
+    PASSWORD: velma9717
+---
+
+- launchApp:
+    appId: "com.example.verygoodcore.foodapp"
+    stopApp: true
+    clearState: true
+
+- tapOn: "Login"
+- assertVisible: "Sign in with Google"
+- tapOn: "Sign in with Google"
+- tapOn: "Velma Kimani"

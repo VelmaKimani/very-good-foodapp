@@ -1,0 +1,14 @@
+# config.yaml
+appId: com.example.verygoodcore.foodapp
+
+---
+
+- launchApp:
+    appId: "com.example.verygoodcore.foodapp"
+    stopApp: true
+    clearState: true
+
+- flows:
+    - "auth/sign_in.yaml"
+    - "search/search.yaml"
+#- stopApp

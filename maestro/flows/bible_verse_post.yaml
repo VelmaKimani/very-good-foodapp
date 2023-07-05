@@ -1,0 +1,12 @@
+appId: com.shuzia.itestify
+---
+
+- launchApp:
+    appId: "com.shuzia.itestify"
+    stopApp: false
+    clearState: false
+
+- tapOn: "favorite bible verse "
+- assertVisible: "bible verse comment"
+- assertVisible: "share bible verse"
+- assertVisible: "flag bible verse"
